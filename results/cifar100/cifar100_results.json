@@ -1,0 +1,86 @@
+{
+  "args": {
+    "hidden_dim": 256,
+    "num_particles": 64,
+    "particle_dim": 64,
+    "num_steps": 8,
+    "encoder": "weak",
+    "epochs": 50,
+    "batch_size": 128,
+    "lr": 0.001,
+    "weight_decay": 0.05,
+    "label_smoothing": 0.1,
+    "warmup_epochs": 5,
+    "cutmix_alpha": 1.0,
+    "mixup_alpha": 0.2,
+    "aux_weight": 0.1,
+    "ema_decay": 0.999,
+    "grad_clip": 1.0,
+    "dropout": 0.1,
+    "seeds": 3,
+    "num_workers": 4,
+    "data_dir": "./data",
+    "save_dir": "./results/cifar100",
+    "quick": false
+  },
+  "results": {
+    "baseline": {
+      "flags": {
+        "use_energy": false,
+        "use_topology": false,
+        "use_cooperativity": false,
+        "use_chaperone": false,
+        "use_env_sensitivity": false
+      },
+      "seeds": [
+        {
+          "seed": 42,
+          "best_accuracy": 50.65,
+          "num_parameters": 1509804
+        },
+        {
+          "seed": 43,
+          "best_accuracy": 49.84,
+          "num_parameters": 1509804
+        },
+        {
+          "seed": 44,
+          "best_accuracy": 50.24,
+          "num_parameters": 1509804
+        }
+      ],
+      "mean_accuracy": 50.24333333333334,
+      "std_accuracy": 0.3306895153396222,
+      "num_parameters": 1509804
+    },
+    "full_model": {
+      "flags": {
+        "use_energy": true,
+        "use_topology": true,
+        "use_cooperativity": true,
+        "use_chaperone": true,
+        "use_env_sensitivity": true
+      },
+      "seeds": [
+        {
+          "seed": 42,
+          "best_accuracy": 52.91,
+          "num_parameters": 1509804
+        },
+        {
+          "seed": 43,
+          "best_accuracy": 53.07,
+          "num_parameters": 1509804
+        },
+        {
+          "seed": 44,
+          "best_accuracy": 52.66,
+          "num_parameters": 1509804
+        }
+      ],
+      "mean_accuracy": 52.879999999999995,
+      "std_accuracy": 0.1687206764645849,
+      "num_parameters": 1509804
+    }
+  }
+}

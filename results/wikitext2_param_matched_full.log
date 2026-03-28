@@ -1,0 +1,47 @@
+Device: mps
+/Users/kmagdy-ma-eg/Workspace/Research/FoldFlow/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Token indices sequence length is longer than the specified maximum sequence length for this model (2391884 > 1024). Running this sequence through the model will result in indexing errors
+WikiText-2 train tokens: 2,391,884
+WikiText-2 val tokens: 247,289
+
+============================================================
+Model: transformer++ | Seed: 42
+Parameters: 50,911,280
+  Epoch   1/10 | LR 0.000300 | Train Loss 7.1445 | Val Loss 6.8710 | Val PPL 963.9 | Best PPL 963.9
+  Epoch   2/10 | LR 0.000300 | Train Loss 6.5481 | Val Loss 6.6279 | Val PPL 755.9 | Best PPL 755.9
+  Epoch   4/10 | LR 0.000265 | Train Loss 5.9440 | Val Loss 6.4233 | Val PPL 616.1 | Best PPL 616.1
+  Epoch   6/10 | LR 0.000176 | Train Loss 5.4500 | Val Loss 6.3861 | Val PPL 593.6 | Best PPL 593.6
+  Epoch   8/10 | LR 0.000076 | Train Loss 5.0691 | Val Loss 6.4285 | Val PPL 619.2 | Best PPL 593.6
+  Epoch  10/10 | LR 0.000010 | Train Loss 4.8770 | Val Loss 6.4565 | Val PPL 636.9 | Best PPL 593.6
+
+============================================================
+Model: transformer++ | Seed: 43
+Parameters: 50,911,280
+  Epoch   1/10 | LR 0.000300 | Train Loss 7.1324 | Val Loss 6.8599 | Val PPL 953.3 | Best PPL 953.3
+  Epoch   2/10 | LR 0.000300 | Train Loss 6.5289 | Val Loss 6.6076 | Val PPL 740.7 | Best PPL 740.7
+  Epoch   4/10 | LR 0.000265 | Train Loss 5.9321 | Val Loss 6.4334 | Val PPL 622.3 | Best PPL 622.3
+  Epoch   6/10 | LR 0.000176 | Train Loss 5.4435 | Val Loss 6.4008 | Val PPL 602.3 | Best PPL 591.9
+  Epoch   8/10 | LR 0.000076 | Train Loss 5.0599 | Val Loss 6.4346 | Val PPL 623.1 | Best PPL 591.9
+  Epoch  10/10 | LR 0.000010 | Train Loss 4.8659 | Val Loss 6.4681 | Val PPL 644.3 | Best PPL 591.9
+
+============================================================
+Model: transformer++ | Seed: 44
+Parameters: 50,911,280
+  Epoch   1/10 | LR 0.000300 | Train Loss 7.1429 | Val Loss 6.8475 | Val PPL 941.5 | Best PPL 941.5
+  Epoch   2/10 | LR 0.000300 | Train Loss 6.5360 | Val Loss 6.6075 | Val PPL 740.6 | Best PPL 740.6
+  Epoch   4/10 | LR 0.000265 | Train Loss 5.9344 | Val Loss 6.4328 | Val PPL 621.9 | Best PPL 621.9
+  Epoch   6/10 | LR 0.000176 | Train Loss 5.4407 | Val Loss 6.3878 | Val PPL 594.5 | Best PPL 594.5
+  Epoch   8/10 | LR 0.000076 | Train Loss 5.0553 | Val Loss 6.4362 | Val PPL 624.0 | Best PPL 594.5
+  Epoch  10/10 | LR 0.000010 | Train Loss 4.8596 | Val Loss 6.4768 | Val PPL 649.9 | Best PPL 594.5
+
+transformer++: PPL = 593.3 ± 1.1
+
+============================================================
+Model                            PPL       Params
+============================================================
+transformer++           593.3 ±  1.1  50,911,280
+============================================================
+Config: d_model=560, n_layers=6, seq_len=256, batch=16, epochs=10
+Total time: 10847s
+Results saved to results/wikitext2_param_matched.json

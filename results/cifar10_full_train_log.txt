@@ -1,0 +1,31 @@
+Device: mps
+Training samples: 50000
+Test samples: 10000
+Model parameters: 1,480,824
+Epoch   1/200 | LR 0.000200 | Train 27.4% | Val 45.6% | EMA 0.0% | Best 45.6% | 100s
+Epoch  10/200 | LR 0.000999 | Train 48.9% | Val 56.2% | EMA 11.9% | Best 64.2% | 1058s
+Epoch  20/200 | LR 0.000987 | Train 53.0% | Val 69.8% | EMA 13.0% | Best 70.6% | 2094s
+Epoch  30/200 | LR 0.000963 | Train 55.1% | Val 76.3% | EMA 13.7% | Best 76.3% | 3672s
+Epoch  40/200 | LR 0.000927 | Train 54.7% | Val 75.3% | EMA 12.9% | Best 77.7% | 5728s
+Epoch  50/200 | LR 0.000880 | Train 58.4% | Val 77.2% | EMA 11.6% | Best 78.6% | 7434s
+Epoch  60/200 | LR 0.000823 | Train 59.7% | Val 77.8% | EMA 10.9% | Best 79.2% | 9107s
+Epoch  70/200 | LR 0.000757 | Train 56.6% | Val 78.7% | EMA 11.4% | Best 80.8% | 10810s
+Epoch  80/200 | LR 0.000685 | Train 60.0% | Val 78.8% | EMA 10.2% | Best 80.8% | 12356s
+Epoch  90/200 | LR 0.000608 | Train 59.3% | Val 81.3% | EMA 10.0% | Best 81.3% | 13856s
+Epoch 100/200 | LR 0.000529 | Train 64.2% | Val 81.9% | EMA 10.0% | Best 82.0% | 15728s
+Epoch 110/200 | LR 0.000448 | Train 59.6% | Val 82.8% | EMA 10.0% | Best 82.9% | 17745s
+Epoch 120/200 | LR 0.000369 | Train 62.7% | Val 82.1% | EMA 10.0% | Best 83.0% | 19275s
+Epoch 130/200 | LR 0.000294 | Train 63.5% | Val 84.0% | EMA 10.0% | Best 84.0% | 20822s
+Epoch 140/200 | LR 0.000223 | Train 65.6% | Val 83.8% | EMA 10.0% | Best 84.0% | 22404s
+Epoch 150/200 | LR 0.000160 | Train 66.3% | Val 84.7% | EMA 10.0% | Best 84.7% | 23957s
+Epoch 160/200 | LR 0.000106 | Train 66.3% | Val 84.4% | EMA 10.0% | Best 85.0% | 25583s
+Epoch 170/200 | LR 0.000062 | Train 67.4% | Val 85.0% | EMA 10.0% | Best 85.2% | 27614s
+Epoch 180/200 | LR 0.000029 | Train 66.7% | Val 85.3% | EMA 10.0% | Best 85.5% | 30184s
+Epoch 190/200 | LR 0.000009 | Train 68.6% | Val 85.6% | EMA 85.5% | Best 85.7% | 6899s
+Epoch 200/200 | LR 0.000001 | Train 66.4% | Val 85.7% | EMA 85.6% | Best 85.7% | 9179s
+
+============================================================
+Training complete — Best accuracy: 85.72%
+Parameters: 1,480,824
+Total time: 9180s
+Results saved to checkpoints/cifar10_results.json

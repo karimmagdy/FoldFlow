@@ -1,0 +1,102 @@
+Device: mps
+Epochs: 50, Seeds: 3
+Loaded 4 existing configs from results/ablation_results.json
+
+[1/9] Config: +energy+chaperone | Seed: 42
+    +energy+chaperone/s42 Epoch 1/50 | Acc 42.16% | Best 42.16%
+    +energy+chaperone/s42 Epoch 10/50 | Acc 57.47% | Best 60.94%
+    +energy+chaperone/s42 Epoch 20/50 | Acc 69.59% | Best 71.72%
+    +energy+chaperone/s42 Epoch 30/50 | Acc 78.62% | Best 78.62%
+    +energy+chaperone/s42 Epoch 40/50 | Acc 80.77% | Best 80.92%
+    +energy+chaperone/s42 Epoch 50/50 | Acc 82.16% | Best 82.25%
+  -> Accuracy: 82.25% | Params: 1,480,824
+
+[2/9] Config: +energy+chaperone | Seed: 43
+    +energy+chaperone/s43 Epoch 1/50 | Acc 39.06% | Best 39.06%
+    +energy+chaperone/s43 Epoch 10/50 | Acc 65.26% | Best 65.94%
+    +energy+chaperone/s43 Epoch 20/50 | Acc 71.33% | Best 73.50%
+    +energy+chaperone/s43 Epoch 30/50 | Acc 77.67% | Best 77.67%
+    +energy+chaperone/s43 Epoch 40/50 | Acc 80.39% | Best 80.40%
+    +energy+chaperone/s43 Epoch 50/50 | Acc 81.81% | Best 81.81%
+  -> Accuracy: 81.81% | Params: 1,480,824
+
+[3/9] Config: +energy+chaperone | Seed: 44
+    +energy+chaperone/s44 Epoch 1/50 | Acc 42.81% | Best 42.81%
+    +energy+chaperone/s44 Epoch 10/50 | Acc 61.11% | Best 65.07%
+    +energy+chaperone/s44 Epoch 20/50 | Acc 72.62% | Best 73.28%
+    +energy+chaperone/s44 Epoch 30/50 | Acc 78.28% | Best 78.28%
+    +energy+chaperone/s44 Epoch 40/50 | Acc 80.57% | Best 80.57%
+    +energy+chaperone/s44 Epoch 50/50 | Acc 81.83% | Best 81.83%
+  -> Accuracy: 81.83% | Params: 1,480,824
+  Config +energy+chaperone: 81.96 +/- 0.20%
+
+[4/9] Config: +energy+env_sensitivity | Seed: 42
+    +energy+env_sensitivity/s42 Epoch 1/50 | Acc 40.32% | Best 40.32%
+    +energy+env_sensitivity/s42 Epoch 10/50 | Acc 56.28% | Best 61.44%
+    +energy+env_sensitivity/s42 Epoch 20/50 | Acc 71.24% | Best 73.89%
+    +energy+env_sensitivity/s42 Epoch 30/50 | Acc 78.10% | Best 78.10%
+    +energy+env_sensitivity/s42 Epoch 40/50 | Acc 80.88% | Best 80.88%
+    +energy+env_sensitivity/s42 Epoch 50/50 | Acc 82.31% | Best 82.51%
+  -> Accuracy: 82.51% | Params: 1,480,824
+
+[5/9] Config: +energy+env_sensitivity | Seed: 43
+    +energy+env_sensitivity/s43 Epoch 1/50 | Acc 38.73% | Best 38.73%
+    +energy+env_sensitivity/s43 Epoch 10/50 | Acc 66.03% | Best 67.11%
+    +energy+env_sensitivity/s43 Epoch 20/50 | Acc 73.22% | Best 73.83%
+    +energy+env_sensitivity/s43 Epoch 30/50 | Acc 78.20% | Best 78.20%
+    +energy+env_sensitivity/s43 Epoch 40/50 | Acc 81.29% | Best 81.29%
+    +energy+env_sensitivity/s43 Epoch 50/50 | Acc 81.95% | Best 81.95%
+  -> Accuracy: 81.95% | Params: 1,480,824
+
+[6/9] Config: +energy+env_sensitivity | Seed: 44
+    +energy+env_sensitivity/s44 Epoch 1/50 | Acc 44.21% | Best 44.21%
+    +energy+env_sensitivity/s44 Epoch 10/50 | Acc 63.99% | Best 63.99%
+    +energy+env_sensitivity/s44 Epoch 20/50 | Acc 72.87% | Best 73.82%
+    +energy+env_sensitivity/s44 Epoch 30/50 | Acc 77.64% | Best 77.64%
+    +energy+env_sensitivity/s44 Epoch 40/50 | Acc 80.21% | Best 80.29%
+    +energy+env_sensitivity/s44 Epoch 50/50 | Acc 81.43% | Best 81.57%
+  -> Accuracy: 81.57% | Params: 1,480,824
+  Config +energy+env_sensitivity: 82.01 +/- 0.39%
+
+[7/9] Config: full_model | Seed: 42
+    full_model/s42 Epoch 1/50 | Acc 39.82% | Best 39.82%
+    full_model/s42 Epoch 10/50 | Acc 62.77% | Best 62.77%
+    full_model/s42 Epoch 20/50 | Acc 70.59% | Best 74.01%
+    full_model/s42 Epoch 30/50 | Acc 77.80% | Best 77.80%
+    full_model/s42 Epoch 40/50 | Acc 81.47% | Best 81.49%
+    full_model/s42 Epoch 50/50 | Acc 82.85% | Best 82.96%
+  -> Accuracy: 82.96% | Params: 1,480,824
+
+[8/9] Config: full_model | Seed: 43
+    full_model/s43 Epoch 1/50 | Acc 39.52% | Best 39.52%
+    full_model/s43 Epoch 10/50 | Acc 66.27% | Best 66.79%
+    full_model/s43 Epoch 20/50 | Acc 73.87% | Best 73.87%
+    full_model/s43 Epoch 30/50 | Acc 78.39% | Best 78.39%
+    full_model/s43 Epoch 40/50 | Acc 82.07% | Best 82.09%
+    full_model/s43 Epoch 50/50 | Acc 83.42% | Best 83.44%
+  -> Accuracy: 83.44% | Params: 1,480,824
+
+[9/9] Config: full_model | Seed: 44
+    full_model/s44 Epoch 1/50 | Acc 41.97% | Best 41.97%
+    full_model/s44 Epoch 10/50 | Acc 61.87% | Best 65.42%
+    full_model/s44 Epoch 20/50 | Acc 70.50% | Best 72.10%
+    full_model/s44 Epoch 30/50 | Acc 78.23% | Best 78.23%
+    full_model/s44 Epoch 40/50 | Acc 81.21% | Best 81.21%
+    full_model/s44 Epoch 50/50 | Acc 82.59% | Best 82.59%
+  -> Accuracy: 82.59% | Params: 1,480,824
+  Config full_model: 83.00 +/- 0.35%
+
+======================================================================
+Config                             Accuracy       Params
+======================================================================
+baseline                          81.62 +/- 0.18   1,480,824
++energy                           81.82 +/- 0.10   1,480,824
++energy+topology                  82.92 +/- 0.11   1,480,824
++energy+cooperativity             82.10 +/- 0.18   1,480,824
++energy+chaperone                 81.96 +/- 0.20   1,480,824
++energy+env_sensitivity           82.01 +/- 0.39   1,480,824
+full_model                        83.00 +/- 0.35   1,480,824
+======================================================================
+Total time: 51738s
+
+Results saved to results/ablation_results.json

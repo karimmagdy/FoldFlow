@@ -1,0 +1,129 @@
+Device: mps
+/Users/kmagdy-ma-eg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Token indices sequence length is longer than the specified maximum sequence length for this model (2391884 > 1024). Running this sequence through the model will result in indexing errors
+WikiText-2 train tokens: 2,391,884
+WikiText-2 val tokens: 247,289
+
+============================================================
+Model: transformer++ | Seed: 42
+Parameters: 44,777,984
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.1515 | Val Loss 6.8640 | Val PPL 957.2 | Best PPL 957.2
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.2267 | Val Loss 6.5021 | Val PPL 666.5 | Best PPL 666.5
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.4847 | Val Loss 6.3997 | Val PPL 601.7 | Best PPL 599.2
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.8754 | Val Loss 6.5022 | Val PPL 666.6 | Best PPL 599.2
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.4504 | Val Loss 6.6576 | Val PPL 778.7 | Best PPL 599.2
+  Epoch  15/15 | LR 0.000005 | Train Loss 4.2841 | Val Loss 6.7176 | Val PPL 826.9 | Best PPL 599.2
+
+============================================================
+Model: transformer++ | Seed: 43
+Parameters: 44,777,984
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.1471 | Val Loss 6.8668 | Val PPL 959.9 | Best PPL 959.9
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.2347 | Val Loss 6.4944 | Val PPL 661.4 | Best PPL 661.4
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.4939 | Val Loss 6.3938 | Val PPL 598.1 | Best PPL 598.1
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.8843 | Val Loss 6.5033 | Val PPL 667.3 | Best PPL 598.1
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.4588 | Val Loss 6.6760 | Val PPL 793.1 | Best PPL 598.1
+  Epoch  15/15 | LR 0.000005 | Train Loss 4.2914 | Val Loss 6.7269 | Val PPL 834.5 | Best PPL 598.1
+
+transformer++: PPL = 598.7 ± 0.5
+
+============================================================
+Model: foldflow-no-energy-gate | Seed: 42
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.1370 | Val Loss 6.8418 | Val PPL 936.2 | Best PPL 936.2
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.2012 | Val Loss 6.4762 | Val PPL 649.5 | Best PPL 649.5
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.4524 | Val Loss 6.3770 | Val PPL 588.1 | Best PPL 588.1
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.8400 | Val Loss 6.4980 | Val PPL 663.8 | Best PPL 588.1
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.3983 | Val Loss 6.6398 | Val PPL 764.9 | Best PPL 588.1
+  Epoch  15/15 | LR 0.000005 | Train Loss 4.2225 | Val Loss 6.6914 | Val PPL 805.5 | Best PPL 588.1
+
+============================================================
+Model: foldflow-no-energy-gate | Seed: 43
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.1405 | Val Loss 6.8621 | Val PPL 955.4 | Best PPL 955.4
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.2077 | Val Loss 6.4747 | Val PPL 648.5 | Best PPL 648.5
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.4608 | Val Loss 6.3791 | Val PPL 589.4 | Best PPL 589.4
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.8539 | Val Loss 6.4761 | Val PPL 649.4 | Best PPL 589.4
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.4137 | Val Loss 6.6310 | Val PPL 758.2 | Best PPL 589.4
+  Epoch  15/15 | LR 0.000005 | Train Loss 4.2390 | Val Loss 6.6870 | Val PPL 801.9 | Best PPL 589.4
+
+foldflow-no-energy-gate: PPL = 588.8 ± 0.6
+
+============================================================
+Model: foldflow-no-chaperone | Seed: 42
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.0530 | Val Loss 6.7568 | Val PPL 859.9 | Best PPL 859.9
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.0417 | Val Loss 6.3742 | Val PPL 586.5 | Best PPL 586.5
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.2148 | Val Loss 6.2771 | Val PPL 532.2 | Best PPL 530.4
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.5791 | Val Loss 6.3718 | Val PPL 585.1 | Best PPL 530.4
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.1403 | Val Loss 6.5036 | Val PPL 667.6 | Best PPL 530.4
+  Epoch  15/15 | LR 0.000005 | Train Loss 3.9590 | Val Loss 6.5506 | Val PPL 699.7 | Best PPL 530.4
+
+============================================================
+Model: foldflow-no-chaperone | Seed: 43
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.0479 | Val Loss 6.7533 | Val PPL 856.9 | Best PPL 856.9
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.0410 | Val Loss 6.3647 | Val PPL 581.0 | Best PPL 581.0
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.2084 | Val Loss 6.2610 | Val PPL 523.8 | Best PPL 523.8
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.5692 | Val Loss 6.3694 | Val PPL 583.7 | Best PPL 523.8
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.1268 | Val Loss 6.5060 | Val PPL 669.2 | Best PPL 523.8
+  Epoch  15/15 | LR 0.000005 | Train Loss 3.9460 | Val Loss 6.5520 | Val PPL 700.7 | Best PPL 523.8
+
+foldflow-no-chaperone: PPL = 527.1 ± 3.3
+
+============================================================
+Model: foldflow-no-langevin | Seed: 42
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.0518 | Val Loss 6.7540 | Val PPL 857.5 | Best PPL 857.5
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.0320 | Val Loss 6.3785 | Val PPL 589.1 | Best PPL 589.1
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.1897 | Val Loss 6.2617 | Val PPL 524.1 | Best PPL 524.1
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.5360 | Val Loss 6.3624 | Val PPL 579.6 | Best PPL 524.1
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.0819 | Val Loss 6.5063 | Val PPL 669.3 | Best PPL 524.1
+  Epoch  15/15 | LR 0.000005 | Train Loss 3.8917 | Val Loss 6.5484 | Val PPL 698.1 | Best PPL 524.1
+
+============================================================
+Model: foldflow-no-langevin | Seed: 43
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.0486 | Val Loss 6.7541 | Val PPL 857.5 | Best PPL 857.5
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.0336 | Val Loss 6.3596 | Val PPL 578.0 | Best PPL 578.0
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.1906 | Val Loss 6.2498 | Val PPL 517.9 | Best PPL 517.9
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.5329 | Val Loss 6.3570 | Val PPL 576.5 | Best PPL 517.9
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.0733 | Val Loss 6.5047 | Val PPL 668.3 | Best PPL 517.9
+  Epoch  15/15 | LR 0.000005 | Train Loss 3.8828 | Val Loss 6.5582 | Val PPL 705.0 | Best PPL 517.9
+
+foldflow-no-langevin: PPL = 521.0 ± 3.1
+
+============================================================
+Model: foldflow | Seed: 42
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.0517 | Val Loss 6.7478 | Val PPL 852.2 | Best PPL 852.2
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.0335 | Val Loss 6.3807 | Val PPL 590.3 | Best PPL 590.3
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.1918 | Val Loss 6.2713 | Val PPL 529.2 | Best PPL 529.2
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.5392 | Val Loss 6.3706 | Val PPL 584.4 | Best PPL 529.2
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.0854 | Val Loss 6.5028 | Val PPL 667.0 | Best PPL 529.2
+  Epoch  15/15 | LR 0.000005 | Train Loss 3.8953 | Val Loss 6.5502 | Val PPL 699.4 | Best PPL 529.2
+
+============================================================
+Model: foldflow | Seed: 43
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.0484 | Val Loss 6.7528 | Val PPL 856.4 | Best PPL 856.4
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.0351 | Val Loss 6.3614 | Val PPL 579.1 | Best PPL 579.1
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.1893 | Val Loss 6.2560 | Val PPL 521.1 | Best PPL 521.1
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.5336 | Val Loss 6.3534 | Val PPL 574.5 | Best PPL 521.1
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.0748 | Val Loss 6.5014 | Val PPL 666.1 | Best PPL 521.1
+  Epoch  15/15 | LR 0.000005 | Train Loss 3.8851 | Val Loss 6.5499 | Val PPL 699.2 | Best PPL 521.1
+
+foldflow: PPL = 525.2 ± 4.0
+
+============================================================
+Model                            PPL       Params
+============================================================
+transformer++           598.7 ±  0.5  44,777,984
+foldflow-no-energy-gate    588.8 ±  0.6  50,166,071
+foldflow-no-chaperone    527.1 ±  3.3  50,166,071
+foldflow-no-langevin    521.0 ±  3.1  50,166,071
+foldflow                525.2 ±  4.0  50,166,071
+============================================================
+Config: d_model=512, n_layers=6, seq_len=256, batch=16, epochs=15
+Total time: 105349s
+Results saved to results/wikitext2_ablation_direct/wikitext2_ablation_direct.json

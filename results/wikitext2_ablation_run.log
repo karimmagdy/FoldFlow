@@ -1,0 +1,171 @@
+
+========================================================================
+Running WikiText-2 ablation entry: transformer++
+/Library/Developer/CommandLineTools/usr/bin/python3 scripts/train_wikitext2.py --epochs 15 --seeds 2 --seq-len 256 --batch-size 16 --models transformer++ --save-dir results/wikitext2_ablation/transformerplusplus --results-name transformerplusplus.json
+/Users/kmagdy-ma-eg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Token indices sequence length is longer than the specified maximum sequence length for this model (2391884 > 1024). Running this sequence through the model will result in indexing errors
+Device: mps
+WikiText-2 train tokens: 2,391,884
+WikiText-2 val tokens: 247,289
+
+============================================================
+Model: transformer++ | Seed: 42
+Parameters: 44,777,984
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.1515 | Val Loss 6.8647 | Val PPL 957.9 | Best PPL 957.9
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.2266 | Val Loss 6.4989 | Val PPL 664.4 | Best PPL 664.4
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.4856 | Val Loss 6.3997 | Val PPL 601.6 | Best PPL 599.7
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.8750 | Val Loss 6.5044 | Val PPL 668.1 | Best PPL 599.7
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.4495 | Val Loss 6.6589 | Val PPL 779.7 | Best PPL 599.7
+  Epoch  15/15 | LR 0.000005 | Train Loss 4.2824 | Val Loss 6.7177 | Val PPL 826.9 | Best PPL 599.7
+
+============================================================
+Model: transformer++ | Seed: 43
+Parameters: 44,777,984
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.1472 | Val Loss 6.8650 | Val PPL 958.1 | Best PPL 958.1
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.2353 | Val Loss 6.4964 | Val PPL 662.7 | Best PPL 662.7
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.4944 | Val Loss 6.3925 | Val PPL 597.4 | Best PPL 597.4
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.8840 | Val Loss 6.5034 | Val PPL 667.4 | Best PPL 597.4
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.4587 | Val Loss 6.6712 | Val PPL 789.3 | Best PPL 597.4
+  Epoch  15/15 | LR 0.000005 | Train Loss 4.2905 | Val Loss 6.7275 | Val PPL 835.1 | Best PPL 597.4
+
+transformer++: PPL = 598.5 ± 1.2
+
+============================================================
+Model                            PPL       Params
+============================================================
+transformer++           598.5 ±  1.2  44,777,984
+============================================================
+Config: d_model=512, n_layers=6, seq_len=256, batch=16, epochs=15
+Total time: 26830s
+Results saved to results/wikitext2_ablation/transformerplusplus/transformerplusplus.json
+
+========================================================================
+Running WikiText-2 ablation entry: foldflow-no-energy-gate
+/Library/Developer/CommandLineTools/usr/bin/python3 scripts/train_wikitext2.py --epochs 15 --seeds 2 --seq-len 256 --batch-size 16 --models foldflow-no-energy-gate --save-dir results/wikitext2_ablation/foldflow-no-energy-gate --results-name foldflow-no-energy-gate.json
+/Users/kmagdy-ma-eg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Token indices sequence length is longer than the specified maximum sequence length for this model (2391884 > 1024). Running this sequence through the model will result in indexing errors
+Device: mps
+WikiText-2 train tokens: 2,391,884
+WikiText-2 val tokens: 247,289
+
+============================================================
+Model: foldflow-no-energy-gate | Seed: 42
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.1372 | Val Loss 6.8411 | Val PPL 935.5 | Best PPL 935.5
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.2011 | Val Loss 6.4739 | Val PPL 648.0 | Best PPL 648.0
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.4505 | Val Loss 6.3764 | Val PPL 587.8 | Best PPL 587.8
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.8384 | Val Loss 6.4989 | Val PPL 664.4 | Best PPL 587.8
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.3975 | Val Loss 6.6415 | Val PPL 766.3 | Best PPL 587.8
+  Epoch  15/15 | LR 0.000005 | Train Loss 4.2220 | Val Loss 6.6911 | Val PPL 805.2 | Best PPL 587.8
+
+============================================================
+Model: foldflow-no-energy-gate | Seed: 43
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.1403 | Val Loss 6.8640 | Val PPL 957.2 | Best PPL 957.2
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.2076 | Val Loss 6.4733 | Val PPL 647.6 | Best PPL 647.6
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.4608 | Val Loss 6.3762 | Val PPL 587.7 | Best PPL 587.7
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.8547 | Val Loss 6.4715 | Val PPL 646.4 | Best PPL 587.7
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.4144 | Val Loss 6.6242 | Val PPL 753.1 | Best PPL 587.7
+  Epoch  15/15 | LR 0.000005 | Train Loss 4.2395 | Val Loss 6.6788 | Val PPL 795.4 | Best PPL 587.7
+
+foldflow-no-energy-gate: PPL = 587.8 ± 0.0
+
+============================================================
+Model                            PPL       Params
+============================================================
+foldflow-no-energy-gate    587.8 ±  0.0  50,166,071
+============================================================
+Config: d_model=512, n_layers=6, seq_len=256, batch=16, epochs=15
+Total time: 20680s
+Results saved to results/wikitext2_ablation/foldflow-no-energy-gate/foldflow-no-energy-gate.json
+
+========================================================================
+Running WikiText-2 ablation entry: foldflow-no-chaperone
+/Library/Developer/CommandLineTools/usr/bin/python3 scripts/train_wikitext2.py --epochs 15 --seeds 2 --seq-len 256 --batch-size 16 --models foldflow-no-chaperone --save-dir results/wikitext2_ablation/foldflow-no-chaperone --results-name foldflow-no-chaperone.json
+/Users/kmagdy-ma-eg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Token indices sequence length is longer than the specified maximum sequence length for this model (2391884 > 1024). Running this sequence through the model will result in indexing errors
+Device: mps
+WikiText-2 train tokens: 2,391,884
+WikiText-2 val tokens: 247,289
+
+============================================================
+Model: foldflow-no-chaperone | Seed: 42
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.0530 | Val Loss 6.7508 | Val PPL 854.8 | Best PPL 854.8
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.0395 | Val Loss 6.3676 | Val PPL 582.7 | Best PPL 582.7
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.2130 | Val Loss 6.2721 | Val PPL 529.6 | Best PPL 527.9
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.5793 | Val Loss 6.3627 | Val PPL 579.8 | Best PPL 527.9
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.1420 | Val Loss 6.5089 | Val PPL 671.1 | Best PPL 527.9
+  Epoch  15/15 | LR 0.000005 | Train Loss 3.9609 | Val Loss 6.5483 | Val PPL 698.1 | Best PPL 527.9
+
+============================================================
+Model: foldflow-no-chaperone | Seed: 43
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.0479 | Val Loss 6.7553 | Val PPL 858.6 | Best PPL 858.6
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.0401 | Val Loss 6.3641 | Val PPL 580.6 | Best PPL 580.6
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.2084 | Val Loss 6.2584 | Val PPL 522.4 | Best PPL 522.4
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.5673 | Val Loss 6.3630 | Val PPL 580.0 | Best PPL 522.4
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.1260 | Val Loss 6.4920 | Val PPL 659.8 | Best PPL 522.4
+  Epoch  15/15 | LR 0.000005 | Train Loss 3.9455 | Val Loss 6.5431 | Val PPL 694.4 | Best PPL 522.4
+
+foldflow-no-chaperone: PPL = 525.1 ± 2.7
+
+============================================================
+Model                            PPL       Params
+============================================================
+foldflow-no-chaperone    525.1 ±  2.7  50,166,071
+============================================================
+Config: d_model=512, n_layers=6, seq_len=256, batch=16, epochs=15
+Total time: 73138s
+Results saved to results/wikitext2_ablation/foldflow-no-chaperone/foldflow-no-chaperone.json
+
+========================================================================
+Running WikiText-2 ablation entry: foldflow-no-langevin
+/Library/Developer/CommandLineTools/usr/bin/python3 scripts/train_wikitext2.py --epochs 15 --seeds 2 --seq-len 256 --batch-size 16 --models foldflow-no-langevin --save-dir results/wikitext2_ablation/foldflow-no-langevin --results-name foldflow-no-langevin.json
+/Users/kmagdy-ma-eg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Token indices sequence length is longer than the specified maximum sequence length for this model (2391884 > 1024). Running this sequence through the model will result in indexing errors
+Device: mps
+WikiText-2 train tokens: 2,391,884
+WikiText-2 val tokens: 247,289
+
+============================================================
+Model: foldflow-no-langevin | Seed: 42
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.0516 | Val Loss 6.7540 | Val PPL 857.5 | Best PPL 857.5
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.0341 | Val Loss 6.3761 | Val PPL 587.6 | Best PPL 587.6
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.1926 | Val Loss 6.2634 | Val PPL 525.0 | Best PPL 525.0
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.5391 | Val Loss 6.3749 | Val PPL 587.0 | Best PPL 525.0
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.0844 | Val Loss 6.5063 | Val PPL 669.3 | Best PPL 525.0
+  Epoch  15/15 | LR 0.000005 | Train Loss 3.8943 | Val Loss 6.5524 | Val PPL 700.9 | Best PPL 525.0
+
+============================================================
+Model: foldflow-no-langevin | Seed: 43
+Parameters: 50,166,071
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.0485 | Val Loss 6.7550 | Val PPL 858.3 | Best PPL 858.3
+  Epoch   3/15 | LR 0.000296 | Train Loss 6.0337 | Val Loss 6.3565 | Val PPL 576.2 | Best PPL 576.2
+  Epoch   6/15 | LR 0.000244 | Train Loss 5.1918 | Val Loss 6.2633 | Val PPL 524.9 | Best PPL 524.4
+  Epoch   9/15 | LR 0.000150 | Train Loss 4.5310 | Val Loss 6.3664 | Val PPL 582.0 | Best PPL 524.4
+  Epoch  12/15 | LR 0.000057 | Train Loss 4.0695 | Val Loss 6.5074 | Val PPL 670.1 | Best PPL 524.4
+  Epoch  15/15 | LR 0.000005 | Train Loss 3.8789 | Val Loss 6.5574 | Val PPL 704.4 | Best PPL 524.4
+
+foldflow-no-langevin: PPL = 524.7 ± 0.3
+
+============================================================
+Model                            PPL       Params
+============================================================
+foldflow-no-langevin    524.7 ±  0.3  50,166,071
+============================================================
+Config: d_model=512, n_layers=6, seq_len=256, batch=16, epochs=15
+Total time: 17010s
+Results saved to results/wikitext2_ablation/foldflow-no-langevin/foldflow-no-langevin.json
+
+========================================================================
+Running WikiText-2 ablation entry: foldflow
+/Library/Developer/CommandLineTools/usr/bin/python3 scripts/train_wikitext2.py --epochs 15 --seeds 2 --seq-len 256 --batch-size 16 --models foldflow --save-dir results/wikitext2_ablation/foldflow --results-name foldflow.json
+/Users/kmagdy-ma-eg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Token indices sequence length is longer than the specified maximum sequence length for this model (2391884 > 1024). Running this sequence through the model will result in indexing errors

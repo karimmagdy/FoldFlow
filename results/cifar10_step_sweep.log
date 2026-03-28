@@ -1,0 +1,80 @@
+
+========================================================================
+Running CIFAR-10 sweep entry with num_steps=0
+/Library/Developer/CommandLineTools/usr/bin/python3 scripts/train_cifar10.py --epochs 50 --encoder weak --batch-size 128 --lr 0.001 --num-steps 0 --save-dir results/cifar10_step_sweep/steps_0 --results-name cifar10_steps_0.json --checkpoint-name foldflow_steps_0_best.pt
+Device: mps
+Training samples: 50000
+Test samples: 10000
+Model parameters: 1,480,824
+Epoch   1/50 | LR 0.000200 | Train 27.2% | Val 44.4% | EMA 0.0% | Best 44.4% | 83s
+Epoch  10/50 | LR 0.000981 | Train 48.8% | Val 60.4% | EMA 44.4% | Best 64.9% | 837s
+Epoch  20/50 | LR 0.000780 | Train 53.4% | Val 71.2% | EMA 70.1% | Best 71.2% | 1675s
+Epoch  30/50 | LR 0.000448 | Train 56.8% | Val 76.9% | EMA 77.6% | Best 77.6% | 2501s
+Epoch  40/50 | LR 0.000141 | Train 57.8% | Val 80.8% | EMA 80.2% | Best 80.8% | 3323s
+Epoch  50/50 | LR 0.000002 | Train 62.2% | Val 81.8% | EMA 81.8% | Best 81.9% | 4152s
+
+============================================================
+Training complete — Best accuracy: 81.90%
+Parameters: 1,480,824
+Total time: 4152s
+Results saved to results/cifar10_step_sweep/steps_0/cifar10_steps_0.json
+
+========================================================================
+Running CIFAR-10 sweep entry with num_steps=2
+/Library/Developer/CommandLineTools/usr/bin/python3 scripts/train_cifar10.py --epochs 50 --encoder weak --batch-size 128 --lr 0.001 --num-steps 2 --save-dir results/cifar10_step_sweep/steps_2 --results-name cifar10_steps_2.json --checkpoint-name foldflow_steps_2_best.pt
+Device: mps
+Training samples: 50000
+Test samples: 10000
+Model parameters: 1,480,824
+Epoch   1/50 | LR 0.000200 | Train 26.9% | Val 45.2% | EMA 0.0% | Best 45.2% | 124s
+Epoch  10/50 | LR 0.000981 | Train 48.8% | Val 58.2% | EMA 46.2% | Best 61.8% | 1283s
+Epoch  20/50 | LR 0.000780 | Train 53.5% | Val 70.8% | EMA 73.8% | Best 73.8% | 2585s
+Epoch  30/50 | LR 0.000448 | Train 57.0% | Val 77.3% | EMA 77.9% | Best 77.9% | 3885s
+Epoch  40/50 | LR 0.000141 | Train 57.8% | Val 81.0% | EMA 80.4% | Best 81.0% | 5183s
+Epoch  50/50 | LR 0.000002 | Train 62.1% | Val 81.6% | EMA 81.6% | Best 81.7% | 6479s
+
+============================================================
+Training complete — Best accuracy: 81.68%
+Parameters: 1,480,824
+Total time: 6479s
+Results saved to results/cifar10_step_sweep/steps_2/cifar10_steps_2.json
+
+========================================================================
+Running CIFAR-10 sweep entry with num_steps=4
+/Library/Developer/CommandLineTools/usr/bin/python3 scripts/train_cifar10.py --epochs 50 --encoder weak --batch-size 128 --lr 0.001 --num-steps 4 --save-dir results/cifar10_step_sweep/steps_4 --results-name cifar10_steps_4.json --checkpoint-name foldflow_steps_4_best.pt
+Device: mps
+Training samples: 50000
+Test samples: 10000
+Model parameters: 1,480,824
+Epoch   1/50 | LR 0.000200 | Train 27.1% | Val 44.2% | EMA 0.0% | Best 44.2% | 172s
+Epoch  10/50 | LR 0.000981 | Train 48.7% | Val 65.6% | EMA 46.0% | Best 65.6% | 1747s
+Epoch  20/50 | LR 0.000780 | Train 53.5% | Val 72.9% | EMA 72.1% | Best 72.9% | 3495s
+Epoch  30/50 | LR 0.000448 | Train 57.1% | Val 76.7% | EMA 78.5% | Best 78.5% | 5246s
+Epoch  40/50 | LR 0.000141 | Train 57.9% | Val 80.7% | EMA 79.5% | Best 80.7% | 6990s
+Epoch  50/50 | LR 0.000002 | Train 62.2% | Val 82.0% | EMA 81.9% | Best 82.1% | 8698s
+
+============================================================
+Training complete — Best accuracy: 82.14%
+Parameters: 1,480,824
+Total time: 8698s
+Results saved to results/cifar10_step_sweep/steps_4/cifar10_steps_4.json
+
+========================================================================
+Running CIFAR-10 sweep entry with num_steps=8
+/Library/Developer/CommandLineTools/usr/bin/python3 scripts/train_cifar10.py --epochs 50 --encoder weak --batch-size 128 --lr 0.001 --num-steps 8 --save-dir results/cifar10_step_sweep/steps_8 --results-name cifar10_steps_8.json --checkpoint-name foldflow_steps_8_best.pt
+Device: mps
+Training samples: 50000
+Test samples: 10000
+Model parameters: 1,480,824
+Epoch   1/50 | LR 0.000200 | Train 27.4% | Val 45.6% | EMA 0.0% | Best 45.6% | 264s
+Epoch  10/50 | LR 0.000981 | Train 48.8% | Val 55.8% | EMA 45.5% | Best 62.8% | 2564s
+Epoch  20/50 | LR 0.000780 | Train 53.5% | Val 69.0% | EMA 72.1% | Best 72.1% | 5146s
+Epoch  30/50 | LR 0.000448 | Train 57.1% | Val 76.8% | EMA 75.8% | Best 77.7% | 7708s
+Epoch  40/50 | LR 0.000141 | Train 57.8% | Val 80.1% | EMA 80.0% | Best 80.2% | 10303s
+Epoch  50/50 | LR 0.000002 | Train 62.1% | Val 81.7% | EMA 81.6% | Best 81.8% | 12877s
+
+============================================================
+Training complete — Best accuracy: 81.78%
+Parameters: 1,480,824
+Total time: 12877s
+Results saved to results/cifar10_step_sweep/steps_8/cifar10_steps_8.json

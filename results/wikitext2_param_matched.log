@@ -1,0 +1,11 @@
+Device: mps
+/Users/kmagdy-ma-eg/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Token indices sequence length is longer than the specified maximum sequence length for this model (2391884 > 1024). Running this sequence through the model will result in indexing errors
+WikiText-2 train tokens: 2,391,884
+WikiText-2 val tokens: 247,289
+
+============================================================
+Model: transformer++ | Seed: 42
+Parameters: 50,911,280
+  Epoch   1/15 | LR 0.000300 | Train Loss 7.1446 | Val Loss 6.8694 | Val PPL 962.4 | Best PPL 962.4

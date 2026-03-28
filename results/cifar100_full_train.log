@@ -1,0 +1,86 @@
+Device: mps
+CIFAR-100: 50000 train, 10000 test
+
+============================================================
+Config: baseline | Seed: 42
+Parameters: 1,509,804
+  Epoch   1/50 | Val 9.8% | Best 9.8%
+  Epoch  10/50 | Val 27.1% | Best 29.0%
+  Epoch  20/50 | Val 39.0% | Best 39.5%
+  Epoch  30/50 | Val 44.7% | Best 44.7%
+  Epoch  40/50 | Val 48.5% | Best 48.5%
+  Epoch  50/50 | Val 50.6% | Best 50.6%
+  EMA: 50.6%
+  Final best: 50.65%
+
+============================================================
+Config: baseline | Seed: 43
+Parameters: 1,509,804
+  Epoch   1/50 | Val 8.9% | Best 8.9%
+  Epoch  10/50 | Val 30.6% | Best 30.6%
+  Epoch  20/50 | Val 38.6% | Best 38.6%
+  Epoch  30/50 | Val 45.1% | Best 45.1%
+  Epoch  40/50 | Val 48.2% | Best 48.6%
+  Epoch  50/50 | Val 49.5% | Best 49.8%
+  EMA: 49.5%
+  Final best: 49.84%
+
+============================================================
+Config: baseline | Seed: 44
+Parameters: 1,509,804
+  Epoch   1/50 | Val 8.8% | Best 8.8%
+  Epoch  10/50 | Val 28.0% | Best 28.0%
+  Epoch  20/50 | Val 38.6% | Best 38.6%
+  Epoch  30/50 | Val 44.0% | Best 44.0%
+  Epoch  40/50 | Val 48.7% | Best 48.7%
+  Epoch  50/50 | Val 50.2% | Best 50.2%
+  EMA: 50.0%
+  Final best: 50.24%
+
+baseline: 50.2 ± 0.3%
+
+============================================================
+Config: full_model | Seed: 42
+Parameters: 1,509,804
+  Epoch   1/50 | Val 11.4% | Best 11.4%
+  Epoch  10/50 | Val 27.0% | Best 28.9%
+  Epoch  20/50 | Val 39.7% | Best 40.0%
+  Epoch  30/50 | Val 47.4% | Best 47.4%
+  Epoch  40/50 | Val 51.3% | Best 51.3%
+  Epoch  50/50 | Val 52.9% | Best 52.9%
+  EMA: 52.9%
+  Final best: 52.91%
+
+============================================================
+Config: full_model | Seed: 43
+Parameters: 1,509,804
+  Epoch   1/50 | Val 10.1% | Best 10.1%
+  Epoch  10/50 | Val 30.1% | Best 30.1%
+  Epoch  20/50 | Val 41.3% | Best 41.3%
+  Epoch  30/50 | Val 47.5% | Best 47.5%
+  Epoch  40/50 | Val 51.5% | Best 51.5%
+  Epoch  50/50 | Val 52.7% | Best 53.1%
+  EMA: 52.7%
+  Final best: 53.07%
+
+============================================================
+Config: full_model | Seed: 44
+Parameters: 1,509,804
+  Epoch   1/50 | Val 11.0% | Best 11.0%
+  Epoch  10/50 | Val 30.2% | Best 30.2%
+  Epoch  20/50 | Val 40.2% | Best 40.2%
+  Epoch  30/50 | Val 46.1% | Best 46.1%
+  Epoch  40/50 | Val 51.1% | Best 51.1%
+  Epoch  50/50 | Val 52.7% | Best 52.7%
+  EMA: 52.5%
+  Final best: 52.66%
+
+full_model: 52.9 ± 0.2%
+
+Results saved to results/cifar100/cifar100_results.json
+Total time: 30141s
+
+============================================================
+CIFAR-100 Summary:
+  baseline: 50.2 ± 0.3%
+  full_model: 52.9 ± 0.2%
