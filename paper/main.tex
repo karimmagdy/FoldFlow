@@ -75,7 +75,7 @@ protein folding offers a productive source of inductive biases, and
 that careful ablation---rather than monolithic adoption---is essential
 for identifying which biological principles transfer to which
 computational domains.
-Code is available at \url{https://github.com/anonymous/foldflow}.\footnote{URL anonymized for review.}
+Code is available at \url{https://github.com/karimmagdy/foldflow}.
 \end{abstract}
 
 % ====================================================================
@@ -508,7 +508,7 @@ Accuracy (\%) & 81.9 & 81.7 & \textbf{82.1} & 81.8 \\
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.95\linewidth]{../figures/fig1_ablation.pdf}
+  \includegraphics[width=0.95\linewidth]{figures/fig1_ablation.pdf}
   \caption{Ablation study on CIFAR-10.  Each bar shows mean test accuracy
     ($\pm$ std) over 3 seeds.  Dynamic topology~(C2) contributes the
     largest individual gain.  The full model combining all five
@@ -518,7 +518,7 @@ Accuracy (\%) & 81.9 & 81.7 & \textbf{82.1} & 81.8 \\
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.95\linewidth]{../figures/fig2_training_curves.pdf}
+  \includegraphics[width=0.95\linewidth]{figures/fig2_training_curves.pdf}
   \caption{CIFAR-10 training curves for the full FoldFlow classifier
     (200 epochs).  Left: training and validation accuracy.  The gap
     between train (${\sim}67\%$) and val (${\sim}85\%$) reflects heavy
@@ -599,7 +599,7 @@ reported in Table~\ref{tab:lm_matched} (Section~\ref{sec:analysis}).
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.85\linewidth]{../figures/fig3_wikitext2.pdf}
+  \includegraphics[width=0.85\linewidth]{figures/fig3_wikitext2.pdf}
   \caption{WikiText-2 perplexity comparison.  FoldFlow~LM reduces
     perplexity by 12.3\% relative to Transformer++.  The component
     ablation reveals energy-gated attention as the dominant contributor.
@@ -718,7 +718,7 @@ modality-dependent pattern.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=0.95\linewidth]{../figures/fig4_cross_domain.pdf}
+  \includegraphics[width=0.95\linewidth]{figures/fig4_cross_domain.pdf}
   \caption{Cross-domain component importance.  \textbf{Left:} CIFAR-10
     accuracy gain from each component (higher is more important).
     \textbf{Right:} WikiText-2 perplexity increase when removing each

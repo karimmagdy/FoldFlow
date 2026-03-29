@@ -13,7 +13,22 @@
 \newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
 
 \title{FoldFlow: Supplementary Material}
-\author{Anonymous Author(s)}
+\author{
+  Karim Magdy$^{1(\boxtimes)}$\thanks{Corresponding author.} \\
+  \And
+  Ghada Khoriba$^{1,2}$ \\
+  \And
+  Hala Abbas$^{1,3}$ \\
+  \\
+  $^1$Computer Science Department, Faculty of Computers and Artificial Intelligence, \\
+  Helwan University, Helwan, Egypt \\
+  \texttt{\{karimmagdy\_csp,ghada\_khoriba\}@fci.helwan.edu.eg} \\
+  $^2$School of Information Technology and Computer Science (ITCS), \\
+  Nile University, Giza, Egypt \\
+  \texttt{ghadaKhoriba@nu.edu.eg} \\
+  $^3$Faculty of Computer Studies, Arab Open University, Cairo, Egypt \\
+  \texttt{hala.abbas@aou.edu.eg}
+}
 
 \begin{document}
 \maketitle
@@ -194,7 +209,7 @@ attention is the primary driver of the improvement.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.95\linewidth]{../figures/fig_wt2_training_curves.pdf}
+  \includegraphics[width=0.95\linewidth]{figures/fig_wt2_training_curves.pdf}
   \caption{WikiText-2 training curves (mean over 2 seeds, shaded region
     $= \pm 1$ std).  \textbf{Left:} Validation perplexity.
     \textbf{Right:} Training loss.  Best perplexity is reached around
@@ -215,7 +230,7 @@ across depths, with $T{=}4$ marginally best.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.6\linewidth]{../figures/fig5_step_sweep.pdf}
+  \includegraphics[width=0.6\linewidth]{figures/fig5_step_sweep.pdf}
   \caption{Effect of Langevin dynamics depth $T$ on CIFAR-10 accuracy.
     Full model (C1--C5), 50 epochs, 1 seed.  Performance is insensitive
     to depth for $T \geq 2$.}
