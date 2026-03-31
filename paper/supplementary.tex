@@ -1,5 +1,5 @@
 % FoldFlow: Supplementary Material
-% NeurIPS 2026
+% TMLR Submission
 
 \documentclass[10pt]{article}
 \usepackage{neurips_2026}
@@ -108,7 +108,7 @@ Vocabulary size & 50,257 (GPT-2 tokenizer) \\
 Sequence length & 256 \\
 \midrule
 Transformer++ parameters & 44,777,984 (44.8M) \\
-FoldFlow LM parameters & 50,189,312 (50.2M) \\
+FoldFlow LM parameters & 50,166,071 (50.2M) \\
 Parameter-matched T++ ($d{=}560$) & 50.9M \\
 \midrule
 Optimizer & AdamW \\
@@ -219,8 +219,25 @@ attention is the primary driver of the improvement.
 
 \subsection{CIFAR-100 Results}
 
-\todo{Add CIFAR-100 baseline vs. full model results when experiment
-completes.}
+Table~\ref{tab:cifar100_supp} reports CIFAR-100 results.  The full
+FoldFlow model improves over the baseline by $+2.6$~pp, consistent
+with the gains observed on CIFAR-10.
+
+\begin{table}[h]
+\centering
+\caption{CIFAR-100 results.  Mean $\pm$ std accuracy (\%) over 3 seeds.
+  Both models: 1.51M parameters, weak encoder, 50 training epochs.}
+\label{tab:cifar100_supp}
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Model & Parameters & Accuracy (\%) \\
+\midrule
+Baseline (encoder only) & 1.51M & $50.2 \pm 0.3$ \\
+Full Model (C1--C5)     & 1.51M & $\mathbf{52.9 \pm 0.2}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Langevin Step Sweep Visualization}
 
@@ -258,10 +275,10 @@ CIFAR-10 ablation (50 ep, 3 seeds)     & 7 configs & $\sim$12 hours \\
 CIFAR-10 extended (200 ep)              & 1 config  & $\sim$6 hours \\
 CIFAR-10 step sweep (50 ep, 1 seed)    & 4 configs & $\sim$4 hours \\
 WikiText-2 ablation (15 ep, 2 seeds)   & 5 models  & $\sim$15 hours \\
-WikiText-2 param-matched (15 ep, 2 seeds) & 1 model & $\sim$6 hours \\
-CIFAR-100 (50 ep, 3 seeds)            & 2 configs & \todo{TBD} \\
+WikiText-2 param-matched (10 ep, 3 seeds) & 1 model & $\sim$6 hours \\
+CIFAR-100 (50 ep, 3 seeds)            & 2 configs & $\sim$4 hours \\
 \midrule
-\textbf{Total} & & $\sim$\textbf{43 hours} \\
+\textbf{Total} & & $\sim$\textbf{47 hours} \\
 \bottomrule
 \end{tabular}
 \end{table}

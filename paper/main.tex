@@ -1,5 +1,5 @@
 % FoldFlow: Which Principles of Protein Folding Transfer to Neural Architecture Design?
-% NeurIPS 2026 Submission
+% TMLR Submission
 %
 % Options: [final] for camera-ready, [preprint] for arXiv, default = submission
 \documentclass[10pt]{article}
@@ -58,18 +58,18 @@ We ask which of these principles, when translated into differentiable
 neural modules, improve standard architectures for tasks \emph{beyond}
 structural biology.  We introduce \textbf{FoldFlow}, an architecture
 that maps five hallmarks of protein folding to neural computation:
-Langevin dynamics on a learned energy landscape, input-conditioned
+Langevin dynamics on a learned energy landscape, data-dependent
 attention topology, depthwise-separable cooperativity, stress-gated
 chaperone correction, and context-dependent affine modulation.
 Through systematic ablations on two domains we find that
 \emph{different principles dominate in different modalities}:
 \textbf{(i)}~on CIFAR-10 classification (1.48M parameters, weak
-encoder), dynamic topology provides the largest individual gain
+encoder), adaptive topology provides the largest individual gain
 (+1.3~pp), and the full model reaches 85.7\% with extended training;
 \textbf{(ii)}~on WikiText-2 language modeling, energy-gated attention
 is the dominant contributor, reducing perplexity by 12.3\% relative to
-a parameter-matched Transformer++ baseline (525.2 vs.\ 598.7).
-FoldFlow~LM achieves this improvement while training 2.2$\times$ faster
+the Transformer++ baseline (525.2 vs.\ 598.7).
+FoldFlow~LM achieves this improvement while training 2.3$\times$ faster
 than the baseline in tokens per second.  Our results demonstrate that
 protein folding offers a productive source of inductive biases, and
 that careful ablation---rather than monolithic adoption---is essential
@@ -118,7 +118,7 @@ repairs block outputs, and Langevin refinement post-processes hidden
 states at inference.
 
 A key finding is that \emph{different principles dominate in different
-modalities}.  On CIFAR-10, dynamic topology~(C2)---multi-head attention
+modalities}.  On CIFAR-10, adaptive topology~(C2)---multi-head attention
 over particles, analogous to contact formation---provides the largest
 individual gain (+1.3~pp).  On WikiText-2, energy-gated
 attention---context-dependent modulation of attention heads, analogous
@@ -141,7 +141,7 @@ Our contributions are:
     achieves 12.3\% lower perplexity than a parameter-matched
     Transformer++ on WikiText-2, with component ablation identifying
     energy-gated attention as the key driver and throughput analysis
-    showing a 2.2$\times$ training speed advantage
+    showing a 2.3$\times$ training speed advantage
     (Section~\ref{sec:lm}).
   \item A cross-domain analysis revealing that different protein
     folding principles dominate in different modalities, providing
@@ -230,7 +230,7 @@ Table~\ref{tab:characteristics}.
 \midrule
 C1 & Energy Minimization & Thermodynamic folding funnel
     & Langevin dynamics on $\E_\btheta(\bz \mid \bx)$ \\
-C2 & Dynamic Topology & Contact formation \& rearrangement
+C2 & Adaptive Topology & Contact formation \& rearrangement
     & Multi-head self-attention over particles \\
 C3 & Cooperativity & Local interactions $\to$ global structure
     & Depthwise-separable 1D convolution \\
@@ -266,16 +266,21 @@ $\epsilon(\bc)$:
 where $\tau_t$ is annealed linearly from 1.0 to 0.1 over $T$ steps
 and $\sigma = 0.01$ controls noise magnitude.
 
-\subsection{C2: Dynamic Topology}
+\subsection{C2: Adaptive Topology}
 \label{sec:c2}
 
-Protein contact maps are not fixed but evolve as the chain folds.  We
-model this with multi-head self-attention over the particle set:
+Protein contact maps depend on the amino acid sequence and its
+environment.  We model this with multi-head self-attention over the
+particle set, computed \emph{once} after initialization
+(Algorithm~\ref{alg:foldflow}, line~3) to establish data-dependent
+connectivity before the dynamics phase begins:
 \begin{equation}
-  \bz \leftarrow \bz + \text{MHA}(\text{LN}(\bz)),
+  \bz \leftarrow \bz + \text{MHA}(\text{LN}(\bz)).
 \end{equation}
-applied once after initialization, allowing particles to establish
-input-conditioned connectivity before dynamics begin.
+Unlike iteratively updated topology, this learned topology is fixed
+for the duration of the Langevin dynamics, analogous to how the
+native contact map of a protein is determined by its sequence rather
+than recomputed at each folding step.
 
 \subsection{C3: Cooperativity}
 \label{sec:c3}
@@ -318,6 +323,13 @@ We model this as context-conditioned affine modulation:
 \end{equation}
 where $\gamma$ uses a Softplus activation to ensure positive scaling.
 This is applied at particle initialization and every third dynamics step.
+This mechanism is closely related to Feature-wise Linear Modulation
+(FiLM)~\citep{perez2018film}, which applies learned affine
+transformations conditioned on an auxiliary input.  Our variant differs
+in that the conditioning signal $\bc$ derives from the same input
+encoder (rather than a separate modality) and uses a Softplus-shifted
+scale to ensure stability during Langevin dynamics, but the core
+principle---context-dependent scale and shift---is shared.
 
 \subsection{Readout}
 
@@ -334,7 +346,7 @@ The full procedure is summarized in Algorithm~\ref{alg:foldflow}.
 \REQUIRE Input $\bx$, dynamics steps $T$, energy function $\E_\btheta$
 \STATE $\bc \leftarrow \text{Encoder}(\bx)$ \COMMENT{Encode input context}
 \STATE $\bz^{(0)} \leftarrow \text{InitParticles}(\bc)$
-\STATE $\bz^{(0)} \leftarrow \bz^{(0)} + \text{MHA}(\text{LN}(\bz^{(0)}))$ \COMMENT{C2: Dynamic topology}
+\STATE $\bz^{(0)} \leftarrow \bz^{(0)} + \text{MHA}(\text{LN}(\bz^{(0)}))$ \COMMENT{C2: Adaptive topology (computed once)}
 \STATE $\bz^{(0)} \leftarrow (\gamma(\bc)+0.5) \odot \bz^{(0)} + \beta(\bc)$ \COMMENT{C5: Env.\ init}
 \FOR{$t = 0$ \TO $T-1$}
   \STATE $\bz \leftarrow \bz + \alpha \cdot \text{PWConv}(\text{DWConv}(\text{LN}(\bz)))$ \COMMENT{C3: Cooperativity}
@@ -461,11 +473,11 @@ Full Model (C1--C5)            & 1.48M & $\mathbf{83.0 \pm 0.4}$ \\
 \paragraph{Results.}
 Table~\ref{tab:ablation} and Figure~\ref{fig:ablation} show the ablation
 results.  All individual characteristics improve over the baseline.
-Dynamic topology~(C2) provides the largest single gain ($+1.3$~pp over
+Adaptive topology~(C2) provides the largest single gain ($+1.3$~pp over
 baseline), consistent with its role in enabling input-conditioned
-information routing---analogous to how native contact formation is the
+information routing---analogous to how the native contact map is the
 primary determinant of folding rate~\citep{dill2012protein}.  The full
-model achieves 83.0\% ($\pm$ 0.3), a +1.4~pp gain over the baseline,
+model achieves 83.0\% ($\pm$ 0.4), a +1.4~pp gain over the baseline,
 confirming that the five components work in concert.
 
 We note that published CNN baselines (ResNet-56: 93.0\%) use
@@ -510,7 +522,7 @@ Accuracy (\%) & 81.9 & 81.7 & \textbf{82.1} & 81.8 \\
   \centering
   \includegraphics[width=0.95\linewidth]{figures/fig1_ablation.pdf}
   \caption{Ablation study on CIFAR-10.  Each bar shows mean test accuracy
-    ($\pm$ std) over 3 seeds.  Dynamic topology~(C2) contributes the
+    ($\pm$ std) over 3 seeds.  Adaptive topology~(C2) contributes the
     largest individual gain.  The full model combining all five
     characteristics achieves 83.0\%.}
   \label{fig:ablation}
@@ -626,22 +638,29 @@ second) and wall-clock time per epoch for WikiText-2 models.
 \toprule
 Model & Train tok/s & Epoch time (s) & Relative speed \\
 \midrule
-Transformer++           & 3,378 & 1,543 & 1.00$\times$ \\
-FoldFlow w/o energy gate & 3,582 & 787 & 1.06$\times$ \\
-FoldFlow w/o chaperone  & 7,901 & 375 & 2.34$\times$ \\
-FoldFlow w/o Langevin   & 8,175 & 292 & 2.42$\times$ \\
-FoldFlow LM (full)      & 7,530 & 404 & 2.23$\times$ \\
+Transformer++           & 3,346 & 1,519 & 1.00$\times$ \\
+FoldFlow w/o energy gate & 3,489 & 809 & 1.04$\times$\footnotemark \\
+FoldFlow w/o chaperone  & 7,801 & 378 & 2.33$\times$ \\
+FoldFlow w/o Langevin   & 8,174 & 292 & 2.44$\times$ \\
+FoldFlow LM (full)      & 7,575 & 396 & 2.26$\times$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Unexpectedly, FoldFlow~LM trains \textbf{2.23$\times$ faster} than
+\footnotetext{The ``w/o energy gate'' variant is unexpectedly slower than
+the full model (809s vs.\ 396s per epoch) despite removing a component.
+Without the energy gate, the model falls back to \texttt{nn.MultiheadAttention},
+which incurs the same MPS overhead as Transformer++.  The other FoldFlow
+variants retain the manual QKV projection path that the energy gate
+requires, and therefore benefit from its faster einsum-based implementation.}
+
+Unexpectedly, FoldFlow~LM trains \textbf{2.26$\times$ faster} than
 Transformer++ in tokens per second.  This is because FoldFlow's
 energy-gated attention uses a manual QKV projection followed by
 efficient einsum operations, while our Transformer++ baseline uses
 \texttt{nn.MultiheadAttention} which incurs additional overhead on
-MPS.  The Langevin refinement (applied only at inference) adds
-negligible training cost.  We note that this speed advantage is
+the MPS backend.  The Langevin refinement (applied only at inference)
+adds negligible training cost.  We note that this speed advantage is
 implementation-dependent and may not hold on CUDA hardware with
 optimized attention kernels; the important result is that FoldFlow
 components incur no significant throughput penalty.
@@ -697,7 +716,7 @@ model.
 \# & Component & CIFAR-10 $\Delta$Acc & WikiText-2 $\Delta$PPL \\
 \midrule
 C1 & Energy / Langevin    & +0.2 pp  & $-$4.2 (better) \\
-C2 & Dynamic Topology     & +1.3 pp  & --- \\
+C2 & Adaptive Topology    & +1.3 pp  & --- \\
 C3 & Cooperativity        & +0.5 pp  & --- \\
 C4 & Chaperone            & +0.4 pp  & +1.9 \\
 C5 & Env.\ Sensitivity    & +0.4 pp  & --- \\
@@ -706,7 +725,7 @@ C5 & Env.\ Sensitivity    & +0.4 pp  & --- \\
 \end{tabular}
 \end{table}
 
-The pattern is striking: in vision, \textbf{dynamic topology~(C2)}
+The pattern is striking: in vision, \textbf{adaptive topology~(C2)}
 dominates---enabling particles to form input-conditioned connections
 before dynamics begin.  In language modeling, \textbf{energy-gated
 attention} dominates, accounting for $63.6/73.5 = 87\%$ of the total
@@ -722,7 +741,7 @@ modality-dependent pattern.
   \caption{Cross-domain component importance.  \textbf{Left:} CIFAR-10
     accuracy gain from each component (higher is more important).
     \textbf{Right:} WikiText-2 perplexity increase when removing each
-    component (higher = component helps more).  Dynamic topology
+    component (higher = component helps more).  Adaptive topology
     dominates in vision; energy gating dominates in language.}
   \label{fig:cross_domain}
 \end{figure}
@@ -757,10 +776,10 @@ FoldFlow LM ($d{=}512$)   & 50.2M & $525.2 \pm 4.0$ \\
 
 To isolate the effect of the FoldFlow components from the 12\%
 parameter overhead, we train a wider Transformer++ baseline with
-$d_\text{model}{=}560$ (50.9M parameters), same training
-protocol (Table~\ref{tab:lm_matched}).  The wider Transformer++
+$d_\text{model}{=}560$ (50.9M parameters, 10 epochs, 3 seeds;
+Table~\ref{tab:lm_matched}).  The wider Transformer++
 achieves $593.3 \pm 1.1$ perplexity---nearly identical to the
-original $d{=}512$ model ($594.3 \pm 2.6$) despite 14\% more
+original $d{=}512$ model ($598.7 \pm 0.5$) despite 14\% more
 parameters.  FoldFlow's advantage ($525.2 \pm 4.0$) therefore cannot
 be attributed to its larger parameter count; the folding-inspired
 components contribute meaningfully beyond raw capacity.
@@ -807,7 +826,7 @@ with training.
 Our results suggest practical guidelines for practitioners considering
 bio-inspired components: (1)~energy-gated attention is a reliable
 improvement for autoregressive models with minimal overhead;
-(2)~dynamic topology (attention over particles) is valuable when the
+(2)~adaptive topology (attention over particles) is valuable when the
 input admits a natural set-structured representation; (3)~chaperone
 correction provides consistent but modest gains across domains;
 (4)~Langevin refinement at inference is most effective when the energy
@@ -855,13 +874,13 @@ We presented FoldFlow, an architecture that translates five principles
 of protein folding into differentiable neural modules, and asked which
 of these principles transfer to standard ML tasks.  Through systematic
 ablations on both CIFAR-10 (vision) and WikiText-2 (language), we
-discovered a surprising modality dependence: dynamic topology dominates
+discovered a surprising modality dependence: adaptive topology dominates
 in classification while energy-gated attention dominates in language
 modeling.  This finding argues against monolithic adoption of
 bio-inspired principles and for component-level evaluation.
 
 The full FoldFlow~LM achieves 12.3\% lower perplexity than
-Transformer++ on WikiText-2 while training 2.2$\times$ faster, and
+Transformer++ on WikiText-2 while training 2.3$\times$ faster, and
 the CIFAR-10 ablation confirms all five components contribute to the
 full model's 83.0\% accuracy.  Our results demonstrate that protein
 folding---one of nature's most reliable self-assembly processes---offers
@@ -880,6 +899,10 @@ training configurations (including random seeds, learning rate
 schedules, augmentation parameters), per-seed results, and
 training curves are provided in the supplementary material.
 Code will be released upon acceptance.
+
+% ====================================================================
+\section*{Broader Impact}
+This work explores bio-inspired inductive biases for neural architecture design. The principles studied (energy minimization, topology, etc.) are general-purpose and do not raise specific ethical concerns beyond those common to neural network research. The computational cost of our experiments is modest (single-GPU training), and we release all code and configurations to support reproducibility.
 
 % ====================================================================
 \bibliography{references}

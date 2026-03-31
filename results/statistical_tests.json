@@ -1,0 +1,467 @@
+{
+  "metric": "best_accuracy",
+  "baseline": "transformer++",
+  "source_files": [
+    "results/ablation_results.json"
+  ],
+  "summary": {
+    "baseline": {
+      "mean": 81.61666666666667,
+      "std": 0.1819035153285658,
+      "ci_95": [
+        81.36,
+        81.76
+      ],
+      "n_seeds": 3,
+      "per_seed": [
+        81.36,
+        81.73,
+        81.76
+      ]
+    },
+    "+energy": {
+      "mean": 81.81666666666666,
+      "std": 0.09877021593352273,
+      "ci_95": [
+        81.68,
+        81.91
+      ],
+      "n_seeds": 3,
+      "per_seed": [
+        81.91,
+        81.86,
+        81.68
+      ]
+    },
+    "+energy+topology": {
+      "mean": 82.92333333333335,
+      "std": 0.11025223605693993,
+      "ci_95": [
+        82.79,
+        83.06
+      ],
+      "n_seeds": 3,
+      "per_seed": [
+        83.06,
+        82.92,
+        82.79
+      ]
+    },
+    "+energy+cooperativity": {
+      "mean": 82.09666666666665,
+      "std": 0.17594190960528555,
+      "ci_95": [
+        81.89,
+        82.32
+      ],
+      "n_seeds": 3,
+      "per_seed": [
+        82.32,
+        82.08,
+        81.89
+      ]
+    },
+    "+energy+chaperone": {
+      "mean": 81.96333333333332,
+      "std": 0.2028683207293723,
+      "ci_95": [
+        81.81,
+        82.25
+      ],
+      "n_seeds": 3,
+      "per_seed": [
+        82.25,
+        81.81,
+        81.83
+      ]
+    },
+    "+energy+env_sensitivity": {
+      "mean": 82.01,
+      "std": 0.3860915262818782,
+      "ci_95": [
+        81.57,
+        82.51
+      ],
+      "n_seeds": 3,
+      "per_seed": [
+        82.51,
+        81.95,
+        81.57
+      ]
+    },
+    "full_model": {
+      "mean": 82.99666666666666,
+      "std": 0.34797828795614166,
+      "ci_95": [
+        82.59,
+        83.44
+      ],
+      "n_seeds": 3,
+      "per_seed": [
+        82.96,
+        83.44,
+        82.59
+      ]
+    }
+  },
+  "comparisons": [
+    {
+      "model_a": "baseline",
+      "model_b": "+energy",
+      "metric": "best_accuracy",
+      "mean_a": 81.61666666666667,
+      "mean_b": 81.81666666666666,
+      "diff_mean": -0.19999999999998863,
+      "diff_ci_95": [
+        -0.4399999999999977,
+        0.009999999999990905
+      ],
+      "t_statistic": -1.0798984943120735,
+      "p_value": 0.28018738384828734,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": false
+    },
+    {
+      "model_a": "baseline",
+      "model_b": "+energy+topology",
+      "metric": "best_accuracy",
+      "mean_a": 81.61666666666667,
+      "mean_b": 82.92333333333335,
+      "diff_mean": -1.306666666666672,
+      "diff_ci_95": [
+        -1.5633333333333468,
+        -1.0833333333333286
+      ],
+      "t_statistic": -6.468083277108267,
+      "p_value": 9.925379796605401e-11,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": true
+    },
+    {
+      "model_a": "baseline",
+      "model_b": "+energy+cooperativity",
+      "metric": "best_accuracy",
+      "mean_a": 81.61666666666667,
+      "mean_b": 82.09666666666665,
+      "diff_mean": -0.47999999999997556,
+      "diff_ci_95": [
+        -0.7566666666666606,
+        -0.20333333333333314
+      ],
+      "t_statistic": -1.933452064262914,
+      "p_value": 0.053180532801987396,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": false
+    },
+    {
+      "model_a": "baseline",
+      "model_b": "+energy+chaperone",
+      "metric": "best_accuracy",
+      "mean_a": 81.61666666666667,
+      "mean_b": 81.96333333333332,
+      "diff_mean": -0.3466666666666498,
+      "diff_ci_95": [
+        -0.6333333333333258,
+        -0.06666666666666288
+      ],
+      "t_statistic": -1.2760015827336966,
+      "p_value": 0.20195495960342114,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": false
+    },
+    {
+      "model_a": "baseline",
+      "model_b": "+energy+env_sensitivity",
+      "metric": "best_accuracy",
+      "mean_a": 81.61666666666667,
+      "mean_b": 82.01,
+      "diff_mean": -0.39333333333333087,
+      "diff_ci_95": [
+        -0.8933333333333309,
+        0.05333333333334167
+      ],
+      "t_statistic": -0.9922274476782761,
+      "p_value": 0.321086586022036,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": false
+    },
+    {
+      "model_a": "baseline",
+      "model_b": "full_model",
+      "metric": "best_accuracy",
+      "mean_a": 81.61666666666667,
+      "mean_b": 82.99666666666666,
+      "diff_mean": -1.3799999999999812,
+      "diff_ci_95": [
+        -1.8233333333333235,
+        -0.9633333333333383
+      ],
+      "t_statistic": -4.985058143862992,
+      "p_value": 6.194318246568404e-07,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": true
+    },
+    {
+      "model_a": "+energy",
+      "model_b": "+energy+topology",
+      "metric": "best_accuracy",
+      "mean_a": 81.81666666666666,
+      "mean_b": 82.92333333333335,
+      "diff_mean": -1.1066666666666833,
+      "diff_ci_95": [
+        -1.2733333333333263,
+        -0.9566666666666634
+      ],
+      "t_statistic": -42.508244137720105,
+      "p_value": 0.0,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": true
+    },
+    {
+      "model_a": "+energy",
+      "model_b": "+energy+cooperativity",
+      "metric": "best_accuracy",
+      "mean_a": 81.81666666666666,
+      "mean_b": 82.09666666666665,
+      "diff_mean": -0.2799999999999869,
+      "diff_ci_95": [
+        -0.4999999999999858,
+        -0.060000000000002274
+      ],
+      "t_statistic": -4.303450364459838,
+      "p_value": 1.681585347434946e-05,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": true
+    },
+    {
+      "model_a": "+energy",
+      "model_b": "+energy+chaperone",
+      "metric": "best_accuracy",
+      "mean_a": 81.81666666666666,
+      "mean_b": 81.96333333333332,
+      "diff_mean": -0.14666666666666117,
+      "diff_ci_95": [
+        -0.423333333333332,
+        0.07666666666666799
+      ],
+      "t_statistic": -1.3025963421181335,
+      "p_value": 0.1927126072464531,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": false
+    },
+    {
+      "model_a": "+energy",
+      "model_b": "+energy+env_sensitivity",
+      "metric": "best_accuracy",
+      "mean_a": 81.81666666666666,
+      "mean_b": 82.01,
+      "diff_mean": -0.19333333333334224,
+      "diff_ci_95": [
+        -0.6766666666666765,
+        0.23000000000000398
+      ],
+      "t_statistic": -0.9146626749806103,
+      "p_value": 0.36036874479650005,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": false
+    },
+    {
+      "model_a": "+energy",
+      "model_b": "full_model",
+      "metric": "best_accuracy",
+      "mean_a": 81.81666666666666,
+      "mean_b": 82.99666666666666,
+      "diff_mean": -1.1799999999999926,
+      "diff_ci_95": [
+        -1.6066666666666691,
+        -0.7733333333333405
+      ],
+      "t_statistic": -5.783109499602026,
+      "p_value": 7.333229472773339e-09,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": true
+    },
+    {
+      "model_a": "+energy+topology",
+      "model_b": "+energy+cooperativity",
+      "metric": "best_accuracy",
+      "mean_a": 82.92333333333335,
+      "mean_b": 82.09666666666665,
+      "diff_mean": 0.8266666666666964,
+      "diff_ci_95": [
+        0.5933333333333337,
+        1.0600000000000023
+      ],
+      "t_statistic": 17.714285714286287,
+      "p_value": 3.253309450797154e-70,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": true
+    },
+    {
+      "model_a": "+energy+topology",
+      "model_b": "+energy+chaperone",
+      "metric": "best_accuracy",
+      "mean_a": 82.92333333333335,
+      "mean_b": 81.96333333333332,
+      "diff_mean": 0.9600000000000222,
+      "diff_ci_95": [
+        0.6800000000000068,
+        1.1966666666666725
+      ],
+      "t_statistic": 11.085125168440957,
+      "p_value": 1.4814307996573043e-28,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": true
+    },
+    {
+      "model_a": "+energy+topology",
+      "model_b": "+energy+env_sensitivity",
+      "metric": "best_accuracy",
+      "mean_a": 82.92333333333335,
+      "mean_b": 82.01,
+      "diff_mean": 0.9133333333333411,
+      "diff_ci_95": [
+        0.4133333333333411,
+        1.3533333333333388
+      ],
+      "t_statistic": 4.672340393977739,
+      "p_value": 2.977869028505158e-06,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": true
+    },
+    {
+      "model_a": "+energy+topology",
+      "model_b": "full_model",
+      "metric": "best_accuracy",
+      "mean_a": 82.92333333333335,
+      "mean_b": 82.99666666666666,
+      "diff_mean": -0.07333333333330927,
+      "diff_ci_95": [
+        -0.5166666666666515,
+        0.30000000000001137
+      ],
+      "t_statistic": -0.32564908552951205,
+      "p_value": 0.7446898698659694,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": false
+    },
+    {
+      "model_a": "+energy+cooperativity",
+      "model_b": "+energy+chaperone",
+      "metric": "best_accuracy",
+      "mean_a": 82.09666666666665,
+      "mean_b": 81.96333333333332,
+      "diff_mean": 0.13333333333332575,
+      "diff_ci_95": [
+        -0.1566666666666663,
+        0.4166666666666714
+      ],
+      "t_statistic": 1.9494807153142952,
+      "p_value": 0.05123804362419923,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": false
+    },
+    {
+      "model_a": "+energy+cooperativity",
+      "model_b": "+energy+env_sensitivity",
+      "metric": "best_accuracy",
+      "mean_a": 82.09666666666665,
+      "mean_b": 82.01,
+      "diff_mean": 0.08666666666664469,
+      "diff_ci_95": [
+        -0.4133333333333411,
+        0.5433333333333366
+      ],
+      "t_statistic": 0.5823977635968401,
+      "p_value": 0.5602987875865048,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": false
+    },
+    {
+      "model_a": "+energy+cooperativity",
+      "model_b": "full_model",
+      "metric": "best_accuracy",
+      "mean_a": 82.09666666666665,
+      "mean_b": 82.99666666666666,
+      "diff_mean": -0.9000000000000057,
+      "diff_ci_95": [
+        -1.3433333333333337,
+        -0.4733333333333434
+      ],
+      "t_statistic": -3.901994862858556,
+      "p_value": 9.540318286042154e-05,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": true
+    },
+    {
+      "model_a": "+energy+chaperone",
+      "model_b": "+energy+env_sensitivity",
+      "metric": "best_accuracy",
+      "mean_a": 81.96333333333332,
+      "mean_b": 82.01,
+      "diff_mean": -0.04666666666668107,
+      "diff_ci_95": [
+        -0.5401666666666854,
+        0.4133333333333411
+      ],
+      "t_statistic": -0.29686612538798557,
+      "p_value": 0.7665687189455406,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": false
+    },
+    {
+      "model_a": "+energy+chaperone",
+      "model_b": "full_model",
+      "metric": "best_accuracy",
+      "mean_a": 81.96333333333332,
+      "mean_b": 82.99666666666666,
+      "diff_mean": -1.0333333333333314,
+      "diff_ci_95": [
+        -1.470000000000013,
+        -0.6033333333333388
+      ],
+      "t_statistic": -3.459640439281518,
+      "p_value": 0.000540897130890428,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": true
+    },
+    {
+      "model_a": "+energy+env_sensitivity",
+      "model_b": "full_model",
+      "metric": "best_accuracy",
+      "mean_a": 82.01,
+      "mean_b": 82.99666666666666,
+      "diff_mean": -0.9866666666666504,
+      "diff_ci_95": [
+        -1.5833333333333286,
+        -0.39000000000000057
+      ],
+      "t_statistic": -3.2814028659007937,
+      "p_value": 0.001032920947359056,
+      "n_seeds_a": 3,
+      "n_seeds_b": 3,
+      "significant_005": true
+    }
+  ],
+  "latex_table": "\\begin{table}[t]\n\\centering\n\\caption{WikiText-2 convergence results (Accuracy (\\%)).}\n\\label{tab:convergence}\n\\begin{tabular}{lcccc}\n\\toprule\nModel & Accuracy (\\%) & 95\\% CI & $p$-value & Sig. \\\\\n\\midrule\n  baseline & 81.6 $\\pm$ 0.2 & [81.4, 81.8] & 0.2802 &  \\\\\n  +energy & 81.8 $\\pm$ 0.1 & [81.7, 81.9] & 0.2802 &  \\\\\n  +energy+topology & 82.9 $\\pm$ 0.1 & [82.8, 83.1] & 0.0000 & $^*$ \\\\\n  +energy+cooperativity & 82.1 $\\pm$ 0.2 & [81.9, 82.3] & 0.0532 &  \\\\\n  +energy+chaperone & 82.0 $\\pm$ 0.2 & [81.8, 82.2] & 0.2020 &  \\\\\n  +energy+env_sensitivity & 82.0 $\\pm$ 0.4 & [81.6, 82.5] & 0.3211 &  \\\\\n  full_model & \\textbf{83.0 $\\pm$ 0.3} & [82.6, 83.4] & 0.0000 & $^*$ \\\\\n\\bottomrule\n\\end{tabular}\n\\end{table}"
+}
