@@ -1,0 +1,13 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+data/
+checkpoints/
+*.tar.gz
+*.dylib
+.DS_Store
+results/logs/
+results/convergence/
+*.log
+nohup.out
