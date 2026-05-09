@@ -1,0 +1,431 @@
+% ===================================================================
+% FoldFlow -- Scientific Reports submission
+% References file (copied from FoldFlow/paper/references.bib and
+% augmented with additional biophysics / protein-folding citations
+% appropriate for a Nature-family multidisciplinary audience).
+% ===================================================================
+
+% ---- Protein Folding & Structural Biology ----
+@article{anfinsen1973,
+  title={Principles that govern the folding of protein chains},
+  author={Anfinsen, Christian B},
+  journal={Science},
+  volume={181},
+  number={4096},
+  pages={223--230},
+  year={1973},
+}
+
+@article{jumper2021alphafold,
+  title={Highly accurate protein structure prediction with {AlphaFold}},
+  author={Jumper, John and Evans, Richard and Pritzel, Alexander and others},
+  journal={Nature},
+  volume={596},
+  pages={583--589},
+  year={2021},
+}
+
+@article{dill2012protein,
+  title={The protein-folding problem, 50 years on},
+  author={Dill, Ken A and MacCallum, Justin L},
+  journal={Science},
+  volume={338},
+  number={6110},
+  pages={1042--1046},
+  year={2012},
+}
+
+@article{baek2021accurate,
+  title={Accurate prediction of protein structures and interactions using a three-track neural network},
+  author={Baek, Minkyung and DiMaio, Frank and Anishchenko, Ivan and others},
+  journal={Science},
+  volume={373},
+  number={6557},
+  pages={871--876},
+  year={2021},
+}
+
+@article{lin2023evolutionary,
+  title={Evolutionary-scale prediction of atomic-level protein structure with a language model},
+  author={Lin, Zeming and Akin, Halil and Rao, Roshan and others},
+  journal={Science},
+  volume={379},
+  number={6637},
+  pages={1123--1130},
+  year={2023},
+}
+
+% ---- Added protein-folding / biophysics citations for SR audience ----
+@article{hartl2011molecular,
+  title={Molecular chaperones in protein folding and proteostasis},
+  author={Hartl, F Ulrich and Bracher, Andreas and Hayer-Hartl, Manajit},
+  journal={Nature},
+  volume={475},
+  number={7356},
+  pages={324--332},
+  year={2011},
+}
+
+@article{karplus1994folding,
+  title={Protein folding dynamics},
+  author={Karplus, Martin and {\v{S}}ali, Andrej},
+  journal={Current Opinion in Structural Biology},
+  volume={5},
+  number={1},
+  pages={58--73},
+  year={1995},
+}
+
+@article{hopfield1982,
+  title={Neural networks and physical systems with emergent collective computational abilities},
+  author={Hopfield, John J},
+  journal={Proceedings of the National Academy of Sciences},
+  volume={79},
+  number={8},
+  pages={2554--2558},
+  year={1982},
+}
+
+@article{onuchic1997theory,
+  title={Theory of protein folding: the energy landscape perspective},
+  author={Onuchic, Jos{\'e} Nelson and Luthey-Schulten, Zaida and Wolynes, Peter G},
+  journal={Annual Review of Physical Chemistry},
+  volume={48},
+  number={1},
+  pages={545--600},
+  year={1997},
+}
+
+@article{bryngelson1995funnels,
+  title={Funnels, pathways, and the energy landscape of protein folding: a synthesis},
+  author={Bryngelson, Joseph D and Onuchic, Jos{\'e} Nelson and Socci, Nicholas D and Wolynes, Peter G},
+  journal={Proteins: Structure, Function, and Bioinformatics},
+  volume={21},
+  number={3},
+  pages={167--195},
+  year={1995},
+}
+
+@article{wolynes1995navigating,
+  title={Navigating the folding routes},
+  author={Wolynes, Peter G and Onuchic, Jos{\'e} Nelson and Thirumalai, Devarajan},
+  journal={Science},
+  volume={267},
+  number={5204},
+  pages={1619--1620},
+  year={1995},
+}
+
+@article{greydanus2019hamiltonian,
+  title={Hamiltonian neural networks},
+  author={Greydanus, Samuel and Dzamba, Misko and Yosinski, Jason},
+  journal={Advances in Neural Information Processing Systems},
+  volume={32},
+  year={2019},
+}
+
+% ---- Energy-Based Models ----
+@article{lecun2006tutorial,
+  title={A tutorial on energy-based learning},
+  author={LeCun, Yann and Chopra, Sumit and Hadsell, Raia and Ranzato, Marc'Aurelio and Huang, Fu Jie},
+  journal={Predicting Structured Data},
+  volume={1},
+  year={2006},
+}
+
+@inproceedings{du2019implicit,
+  title={Implicit generation and modeling with energy based models},
+  author={Du, Yilun and Mordatch, Igor},
+  booktitle={NeurIPS},
+  year={2019},
+}
+
+% ---- Langevin Dynamics ----
+@inproceedings{welling2011bayesian,
+  title={Bayesian learning via stochastic gradient {Langevin} dynamics},
+  author={Welling, Max and Teh, Yee Whye},
+  booktitle={ICML},
+  pages={681--688},
+  year={2011},
+}
+
+@inproceedings{song2019generative,
+  title={Generative modeling by estimating gradients of the data distribution},
+  author={Song, Yang and Ermon, Stefano},
+  booktitle={NeurIPS},
+  year={2019},
+}
+
+% ---- Flow Matching ----
+@inproceedings{lipman2023flow,
+  title={Flow matching for generative modeling},
+  author={Lipman, Yaron and Chen, Ricky TQ and Ben-Hamu, Heli and Nickel, Maximilian},
+  booktitle={ICLR},
+  year={2023},
+}
+
+@article{bose2024se3stochastic,
+  title={{SE(3)-Stochastic Flow Matching for Protein Backbone Generation}},
+  author={Bose, Avishek Joey and Akhound-Sadegh, Tara and Huguet, Guillaume and Fatras, Kilian and Rector-Brooks, Jarrid and Liu, Cheng-Hao and Nica, Andrei Cristian and Korablyov, Maksym and Bronstein, Michael and Tong, Alexander},
+  journal={ICLR},
+  year={2024},
+}
+
+% ---- Attention & Transformers ----
+@inproceedings{vaswani2017attention,
+  title={Attention is all you need},
+  author={Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and Kaiser, {\L}ukasz and Polosukhin, Illia},
+  booktitle={NeurIPS},
+  year={2017},
+}
+
+% ---- Datasets ----
+@techreport{krizhevsky2009cifar,
+  title={Learning multiple layers of features from tiny images},
+  author={Krizhevsky, Alex},
+  institution={University of Toronto},
+  year={2009},
+}
+
+@article{merity2017pointer,
+  title={Pointer sentinel mixture models},
+  author={Merity, Stephen and Xiong, Caiming and Bradbury, James and Socher, Richard},
+  journal={ICLR},
+  year={2017},
+}
+
+% ---- Training Techniques ----
+@inproceedings{yun2019cutmix,
+  title={{CutMix}: Regularization strategy to train strong classifiers with localizable features},
+  author={Yun, Sangdoo and Han, Dongyoon and Oh, Seong Joon and Chun, Sanghyuk and Choe, Junsuk and Yoo, Youngjoon},
+  booktitle={ICCV},
+  year={2019},
+}
+
+@inproceedings{zhang2018mixup,
+  title={mixup: Beyond empirical risk minimization},
+  author={Zhang, Hongyi and Cisse, Moustapha and Dauphin, Yann N and Lopez-Paz, David},
+  booktitle={ICLR},
+  year={2018},
+}
+
+@article{loshchilov2017decoupled,
+  title={Decoupled weight decay regularization},
+  author={Loshchilov, Ilya and Hutter, Frank},
+  journal={ICLR},
+  year={2019},
+}
+
+@inproceedings{cubuk2020randaugment,
+  title={{RandAugment}: Practical automated data augmentation with a reduced search space},
+  author={Cubuk, Ekin D and Zoph, Barret and Shlens, Jonathon and Le, Quoc V},
+  booktitle={NeurIPS},
+  year={2020},
+}
+
+% ---- Bio-Inspired Neural Networks ----
+@article{millidge2021predictive,
+  title={Predictive coding approximates backprop along arbitrary computation graphs},
+  author={Millidge, Beren and Tschantz, Alexander and Buckley, Christopher L},
+  journal={Neural Computation},
+  volume={34},
+  number={6},
+  pages={1329--1368},
+  year={2022},
+}
+
+@article{ba2016layer,
+  title={Layer normalization},
+  author={Ba, Jimmy Lei and Kiros, Jamie Ryan and Hinton, Geoffrey E},
+  journal={arXiv},
+  note={arXiv:1607.06450},
+  year={2016},
+}
+
+% ---- Mixture of Experts & Sparse Models ----
+@inproceedings{shazeer2017outrageously,
+  title={Outrageously large neural networks: The sparsely-gated mixture-of-experts layer},
+  author={Shazeer, Noam and Mirhoseini, Azalia and Maziarz, Krzysztof and others},
+  booktitle={ICLR},
+  year={2017},
+}
+
+@article{fedus2022switch,
+  title={Switch Transformers: Scaling to trillion parameter models with simple and efficient sparsity},
+  author={Fedus, William and Zoph, Barret and Shazeer, Noam},
+  journal={JMLR},
+  volume={23},
+  number={120},
+  pages={1--39},
+  year={2022},
+}
+
+% ---- Iterative Refinement & Deep Equilibrium ----
+@inproceedings{dehghani2019universal,
+  title={Universal Transformers},
+  author={Dehghani, Mostafa and Gouws, Stephan and Vinyals, Oriol and Uszkoreit, Jakob and Kaiser, {\L}ukasz},
+  booktitle={ICLR},
+  year={2019},
+}
+
+@inproceedings{bai2019deep,
+  title={Deep equilibrium models},
+  author={Bai, Shaojie and Kolter, J Zico and Koltun, Vladlen},
+  booktitle={NeurIPS},
+  year={2019},
+}
+
+@inproceedings{chen2018neural,
+  title={Neural ordinary differential equations},
+  author={Chen, Ricky TQ and Rubanova, Yulia and Bettencourt, Jesse and Duvenaud, David K},
+  booktitle={NeurIPS},
+  year={2018},
+}
+
+% ---- Hopfield Networks ----
+@inproceedings{ramsauer2020hopfield,
+  title={Hopfield networks is all you need},
+  author={Ramsauer, Hubert and Sch{\"a}fl, Bernhard and Lehner, Johannes and Seidl, Philipp and Widrich, Michael and others},
+  booktitle={ICLR},
+  year={2021},
+}
+
+% ---- Vision Architectures (CIFAR-10/100 Baselines) ----
+@inproceedings{he2016deep,
+  title={Deep residual learning for image recognition},
+  author={He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  booktitle={CVPR},
+  pages={770--778},
+  year={2016},
+}
+
+@article{simonyan2014very,
+  title={Very deep convolutional networks for large-scale image recognition},
+  author={Simonyan, Karen and Zisserman, Andrew},
+  journal={ICLR},
+  year={2015},
+}
+
+@inproceedings{zagoruyko2016wide,
+  title={Wide residual networks},
+  author={Zagoruyko, Sergey and Komodakis, Nikos},
+  booktitle={BMVC},
+  year={2016},
+}
+
+@inproceedings{chollet2017xception,
+  title={Xception: Deep learning with depthwise separable convolutions},
+  author={Chollet, Fran{\c{c}}ois},
+  booktitle={CVPR},
+  year={2017},
+}
+
+% ---- Language Model Baselines ----
+@article{merity2018regularizing,
+  title={Regularizing and optimizing {LSTM} language models},
+  author={Merity, Stephen and Keskar, Nitish Shirish and Socher, Richard},
+  journal={ICLR},
+  year={2018},
+}
+
+@inproceedings{dai2019transformer,
+  title={{Transformer-XL}: Attentive language models beyond a fixed-length context},
+  author={Dai, Zihang and Yang, Zhilin and Yang, Yiming and Carbonell, Jaime and Le, Quoc V and Salakhutdinov, Ruslan},
+  booktitle={ACL},
+  pages={2978--2988},
+  year={2019},
+}
+
+% ---- Feature-wise Modulation ----
+@inproceedings{perez2018film,
+  title={FiLM: Visual Reasoning with a General Conditioning Layer},
+  author={Perez, Ethan and Strub, Florian and de Vries, Harm and Dumoulin, Vincent and Courville, Aaron},
+  booktitle={AAAI Conference on Artificial Intelligence},
+  year={2018}
+}
+
+% ---- Gating mechanisms ----
+@article{dauphin2017language,
+  title={Language modeling with gated convolutional networks},
+  author={Dauphin, Yann N and Fan, Angela and Auli, Michael and Grangier, David},
+  journal={ICML},
+  year={2017},
+}
+
+@article{shazeer2020glu,
+  title={{GLU} variants improve {Transformer}},
+  author={Shazeer, Noam},
+  journal={arXiv},
+  note={arXiv:2002.05202},
+  year={2020},
+}
+
+% ---- Physical priors in ML ----
+@article{karniadakis2021physics,
+  title={Physics-informed machine learning},
+  author={Karniadakis, George Em and Kevrekidis, Ioannis G and Lu, Lu and Perdikaris, Paris and Wang, Sifan and Yang, Liu},
+  journal={Nature Reviews Physics},
+  volume={3},
+  number={6},
+  pages={422--440},
+  year={2021},
+}
+
+@article{bronstein2021geometric,
+  title={Geometric deep learning: Grids, groups, graphs, geodesics, and gauges},
+  author={Bronstein, Michael M and Bruna, Joan and Cohen, Taco and Veli{\v{c}}kovi{\'c}, Petar},
+  journal={IEEE Signal Processing Magazine},
+  year={2021},
+}
+
+@article{shazeer2020talkingheads,
+  author       = {Shazeer, Noam and Lan, Zhenzhong and Cheng, Youlong and Ding, Nan and Hou, Le},
+  title        = {Talking-Heads Attention},
+  journal      = {arXiv preprint arXiv:2003.02436},
+  year         = {2020}
+}
+
+@inproceedings{hu2018squeeze,
+  author       = {Hu, Jie and Shen, Li and Sun, Gang},
+  title        = {Squeeze-and-Excitation Networks},
+  booktitle    = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages        = {7132--7141},
+  year         = {2018}
+}
+
+@inproceedings{voita2019analyzing,
+  author       = {Voita, Elena and Talbot, David and Moiseev, Fedor and Sennrich, Rico and Titov, Ivan},
+  title        = {Analyzing Multi-Head Self-Attention: Specialized Heads Do the Heavy Lifting, the Rest Can Be Pruned},
+  booktitle    = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (ACL)},
+  pages        = {5797--5808},
+  year         = {2019}
+}
+
+@inproceedings{michel2019sixteen,
+  author       = {Michel, Paul and Levy, Omer and Neubig, Graham},
+  title        = {Are Sixteen Heads Really Better than One?},
+  booktitle    = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year         = {2019}
+}
+
+@inproceedings{hgformer2022,
+  author       = {Hu, Jie and Cao, Liujuan and Lu, Yang and Zhang, ShengChuan and Wang, Yan and Li, Ke and Huang, Feiyue and Shao, Ling and Ji, Rongrong},
+  title        = {Hypergraph Transformer for Skeleton-Based Action Recognition},
+  booktitle    = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  year         = {2022}
+}
+
+@inproceedings{focal2021,
+  author       = {Yang, Jianwei and Li, Chunyuan and Zhang, Pengchuan and Dai, Xiyang and Xiao, Bin and Yuan, Lu and Gao, Jianfeng},
+  title        = {Focal Self-attention for Local-Global Interactions in Vision Transformers},
+  booktitle    = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year         = {2021}
+}
+
+@article{ibit2023,
+  author       = {{IBiT authors}},
+  title        = {Inductive Bias Injection in Vision Transformers},
+  journal      = {arXiv preprint},
+  year         = {2023},
+  note         = {Surveyed in topology-aware ViT comparison studies; representative of inductive-bias-injected ViT approaches.}
+}

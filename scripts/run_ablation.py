@@ -43,6 +43,14 @@ ABLATION_CONFIGS = {
         use_energy=False, use_topology=False,
         use_cooperativity=False, use_chaperone=False, use_env_sensitivity=False,
     ),
+    # Reviewer W5 control: encoder + ONE MHA layer (topology) + readout, NO folding dynamics.
+    # Tests whether the topology gain is from the MHA addition itself rather than
+    # the folding interpretation. Dynamics loop does not run because all of
+    # use_energy/cooperativity/chaperone are False (see classifier.py:352).
+    "topology_only": dict(
+        use_energy=False, use_topology=True,
+        use_cooperativity=False, use_chaperone=False, use_env_sensitivity=False,
+    ),
     "+energy": dict(
         use_energy=True, use_topology=False,
         use_cooperativity=False, use_chaperone=False, use_env_sensitivity=False,

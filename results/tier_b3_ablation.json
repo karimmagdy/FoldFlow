@@ -1,0 +1,82 @@
+{
+  "args": {
+    "epochs": 50,
+    "seeds": 3,
+    "batch_size": 128,
+    "lr": 0.001,
+    "weight_decay": 0.05,
+    "label_smoothing": 0.1,
+    "hidden_dim": 256,
+    "num_particles": 64,
+    "particle_dim": 64,
+    "num_steps": 8,
+    "encoder": "weak",
+    "data_dir": "./data",
+    "save_dir": "results/tier_b3",
+    "quick": false,
+    "configs": [
+      "topology_only",
+      "baseline"
+    ]
+  },
+  "results": {
+    "topology_only": {
+      "flags": {
+        "use_energy": false,
+        "use_topology": true,
+        "use_cooperativity": false,
+        "use_chaperone": false,
+        "use_env_sensitivity": false
+      },
+      "seeds": [
+        {
+          "seed": 42,
+          "best_accuracy": 82.78,
+          "num_parameters": 1480824
+        },
+        {
+          "seed": 43,
+          "best_accuracy": 82.64,
+          "num_parameters": 1480824
+        },
+        {
+          "seed": 44,
+          "best_accuracy": 83.16,
+          "num_parameters": 1480824
+        }
+      ],
+      "mean_accuracy": 82.86,
+      "std_accuracy": 0.21969676071045252,
+      "num_parameters": 1480824
+    },
+    "baseline": {
+      "flags": {
+        "use_energy": false,
+        "use_topology": false,
+        "use_cooperativity": false,
+        "use_chaperone": false,
+        "use_env_sensitivity": false
+      },
+      "seeds": [
+        {
+          "seed": 42,
+          "best_accuracy": 81.52,
+          "num_parameters": 1480824
+        },
+        {
+          "seed": 43,
+          "best_accuracy": 81.98,
+          "num_parameters": 1480824
+        },
+        {
+          "seed": 44,
+          "best_accuracy": 81.96,
+          "num_parameters": 1480824
+        }
+      ],
+      "mean_accuracy": 81.82,
+      "std_accuracy": 0.21228911104121026,
+      "num_parameters": 1480824
+    }
+  }
+}

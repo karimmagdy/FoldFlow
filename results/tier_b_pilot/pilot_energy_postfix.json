@@ -1,0 +1,78 @@
+{
+  "config": {
+    "d_model": 512,
+    "n_layers": 6,
+    "n_heads": 8,
+    "seq_len": 256,
+    "batch_size": 16,
+    "epochs": 3,
+    "lr": 0.0003,
+    "weight_decay": 0.01,
+    "energy_steps": 3,
+    "disable_energy_gate": false,
+    "disable_chaperone": false,
+    "disable_langevin": false
+  },
+  "results": {
+    "foldflow": {
+      "seeds": [
+        {
+          "seed": 42,
+          "best_ppl": 620.1851278140953,
+          "final_val_loss": 6.430018026717586,
+          "num_parameters": 50166071,
+          "train_epoch_time_s": 353.7069543202718,
+          "train_tokens_per_s": 6938.8930830431755,
+          "val_eval_time_s": 17.368713061014812,
+          "val_tokens_per_s": 16218.255520429431,
+          "log": [
+            {
+              "epoch": 1,
+              "lr": 0.0003,
+              "train_loss": 7.0637862874549615,
+              "train_epoch_time_s": 291.8671998977661,
+              "train_tokens_per_s": 8181.693595020086,
+              "val_loss": 6.777810783583883,
+              "val_ppl": 878.1441706103753,
+              "val_eval_time_s": 10.105397939682007,
+              "val_tokens_per_s": 24446.340606728623,
+              "best_ppl": 878.1441706103753
+            },
+            {
+              "epoch": 2,
+              "lr": 0.0003,
+              "train_loss": 6.432583475194705,
+              "train_epoch_time_s": 334.1139259338379,
+              "train_tokens_per_s": 7147.166923155642,
+              "val_loss": 6.544863394505001,
+              "val_ppl": 695.6616412555398,
+              "val_eval_time_s": 17.477570056915283,
+              "val_tokens_per_s": 14134.688014153011,
+              "best_ppl": 695.6616412555398
+            },
+            {
+              "epoch": 3,
+              "lr": 0.00015049999999999997,
+              "train_loss": 6.044397628123314,
+              "train_epoch_time_s": 435.1397371292114,
+              "train_tokens_per_s": 5487.818730953802,
+              "val_loss": 6.430018026717586,
+              "val_ppl": 620.1851278140953,
+              "val_eval_time_s": 24.523171186447144,
+              "val_tokens_per_s": 10073.73794040666,
+              "best_ppl": 620.1851278140953
+            }
+          ]
+        }
+      ],
+      "mean_ppl": 620.1851278140953,
+      "std_ppl": 0.0,
+      "num_parameters": 50166071,
+      "mean_train_epoch_time_s": 353.7069543202718,
+      "mean_train_tokens_per_s": 6938.8930830431755,
+      "mean_val_eval_time_s": 17.368713061014812,
+      "mean_val_tokens_per_s": 16218.255520429431
+    }
+  },
+  "total_time_s": 1114.3345038890839
+}

@@ -1,9 +1,9 @@
 % FoldFlow: A Systematic Study of Bio-Inspired Inductive Biases for Neural Architecture Design
-% FoldFlow paper
+% FoldFlow paper — TMLR submission version
 %
-% Options: [final] for camera-ready, [preprint] for arXiv, default = submission
+% Options: [accepted] for published version, [preprint] for arXiv, default = submission
 \documentclass[10pt]{article}
-\usepackage{neurips_2026}
+\usepackage{tmlr}
 
 % ---- Extra packages ----
 \usepackage{algorithm}
@@ -953,77 +953,5 @@ This work explores bio-inspired inductive biases for neural architecture design.
 
 % ====================================================================
 \bibliography{references}
-
-% ====================================================================
-% NeurIPS Paper Checklist
-% ====================================================================
-\newcommand{\answerYes}[1][]{\textcolor{blue}{[Yes]}~#1}
-\newcommand{\answerNo}[1][]{\textcolor{orange}{[No]}~#1}
-\newcommand{\answerNA}[1][]{\textcolor{gray}{[N/A]}~#1}
-
-\section*{NeurIPS Paper Checklist}
-\begin{enumerate}
-\item {\bf Claims}
-\item[] Question: Do the main claims accurately reflect the paper's contributions?
-\item[] Answer: \answerYes{}
-\item[] Justification: All claims supported by systematic ablation (7 configs x 3 seeds CIFAR-10, 5 models x 5 seeds WikiText-2).
-
-\item {\bf Limitations}
-\item[] Question: Does the paper discuss limitations?
-\item[] Answer: \answerYes{}
-\item[] Justification: Section~6 discusses scale, compute constraints, weak encoder choice, and Langevin null result.
-
-\item {\bf Theory Assumptions and Proofs}
-\item[] Question: For each theoretical result, does the paper provide full assumptions and proof?
-\item[] Answer: \answerNA{}
-\item[] Justification: This is primarily an empirical study. Energy function formulation is provided with assumptions stated.
-
-\item {\bf Experimental Result Reproducibility}
-\item[] Question: Does the paper disclose all information needed to reproduce results?
-\item[] Answer: \answerYes{}
-\item[] Justification: All hyperparameters, architectures, and training details in Section~4 and Supplementary. Code available upon acceptance.
-
-\item {\bf Open access to data and code}
-\item[] Question: Does the paper provide open access to data and code?
-\item[] Answer: \answerYes{}
-\item[] Justification: All datasets are public benchmarks. Code is available at \url{https://github.com/karimmagdy/FoldFlow}.
-
-\item {\bf Experimental Setting/Details}
-\item[] Question: Does the paper specify all training and test details?
-\item[] Answer: \answerYes{}
-\item[] Justification: Sections~4.1-4.2 and Supplementary provide complete experimental configurations.
-
-\item {\bf Experiment Statistical Significance}
-\item[] Question: Does the paper report error bars or statistical significance?
-\item[] Answer: \answerYes{}
-\item[] Justification: Mean $\pm$ std reported; p-values from paired t-tests for all key comparisons.
-
-\item {\bf Experiments Compute Resources}
-\item[] Question: Does the paper provide compute resource information?
-\item[] Answer: \answerYes{}
-\item[] Justification: Table~5 reports training throughput and compute budget in Supplementary.
-
-\item {\bf Code Of Ethics}
-\item[] Answer: \answerYes{}
-
-\item {\bf Broader Impacts}
-\item[] Answer: \answerYes{}
-\item[] Justification: Broader Impact section included.
-
-\item {\bf Safeguards}
-\item[] Answer: \answerNA{}
-
-\item {\bf Licenses}
-\item[] Answer: \answerYes{}
-
-\item {\bf New Assets}
-\item[] Answer: \answerYes{}
-
-\item {\bf Human Subjects}
-\item[] Answer: \answerNo{}
-
-\item {\bf IRB Approvals}
-\item[] Answer: \answerNA{}
-\end{enumerate}
 
 \end{document}

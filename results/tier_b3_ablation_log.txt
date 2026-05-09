@@ -1,0 +1,68 @@
+Device: cuda
+Epochs: 50, Seeds: 3
+
+[1/6] Config: topology_only | Seed: 42
+    topology_only/s42 Epoch 1/50 | Acc 43.47% | Best 43.47%
+    topology_only/s42 Epoch 10/50 | Acc 64.51% | Best 64.51%
+    topology_only/s42 Epoch 20/50 | Acc 74.24% | Best 74.24%
+    topology_only/s42 Epoch 30/50 | Acc 78.42% | Best 78.42%
+    topology_only/s42 Epoch 40/50 | Acc 81.47% | Best 81.49%
+    topology_only/s42 Epoch 50/50 | Acc 82.77% | Best 82.78%
+  -> Accuracy: 82.78% | Params: 1,480,824
+
+[2/6] Config: topology_only | Seed: 43
+    topology_only/s43 Epoch 1/50 | Acc 39.10% | Best 39.10%
+    topology_only/s43 Epoch 10/50 | Acc 67.17% | Best 67.17%
+    topology_only/s43 Epoch 20/50 | Acc 75.31% | Best 75.31%
+    topology_only/s43 Epoch 30/50 | Acc 79.29% | Best 79.29%
+    topology_only/s43 Epoch 40/50 | Acc 81.76% | Best 81.76%
+    topology_only/s43 Epoch 50/50 | Acc 82.55% | Best 82.64%
+  -> Accuracy: 82.64% | Params: 1,480,824
+
+[3/6] Config: topology_only | Seed: 44
+    topology_only/s44 Epoch 1/50 | Acc 42.77% | Best 42.77%
+    topology_only/s44 Epoch 10/50 | Acc 64.96% | Best 65.11%
+    topology_only/s44 Epoch 20/50 | Acc 74.25% | Best 74.25%
+    topology_only/s44 Epoch 30/50 | Acc 77.36% | Best 77.96%
+    topology_only/s44 Epoch 40/50 | Acc 82.08% | Best 82.16%
+    topology_only/s44 Epoch 50/50 | Acc 83.05% | Best 83.16%
+  -> Accuracy: 83.16% | Params: 1,480,824
+  Config topology_only: 82.86 +/- 0.22%
+
+[4/6] Config: baseline | Seed: 42
+    baseline/s42 Epoch 1/50 | Acc 43.77% | Best 43.77%
+    baseline/s42 Epoch 10/50 | Acc 65.16% | Best 65.16%
+    baseline/s42 Epoch 20/50 | Acc 72.43% | Best 72.64%
+    baseline/s42 Epoch 30/50 | Acc 78.27% | Best 78.27%
+    baseline/s42 Epoch 40/50 | Acc 79.95% | Best 80.50%
+    baseline/s42 Epoch 50/50 | Acc 81.46% | Best 81.52%
+  -> Accuracy: 81.52% | Params: 1,480,824
+
+[5/6] Config: baseline | Seed: 43
+    baseline/s43 Epoch 1/50 | Acc 40.09% | Best 40.09%
+    baseline/s43 Epoch 10/50 | Acc 65.33% | Best 66.29%
+    baseline/s43 Epoch 20/50 | Acc 74.33% | Best 74.33%
+    baseline/s43 Epoch 30/50 | Acc 77.11% | Best 78.30%
+    baseline/s43 Epoch 40/50 | Acc 81.19% | Best 81.19%
+    baseline/s43 Epoch 50/50 | Acc 81.90% | Best 81.98%
+  -> Accuracy: 81.98% | Params: 1,480,824
+
+[6/6] Config: baseline | Seed: 44
+    baseline/s44 Epoch 1/50 | Acc 42.18% | Best 42.18%
+    baseline/s44 Epoch 10/50 | Acc 57.95% | Best 66.50%
+    baseline/s44 Epoch 20/50 | Acc 73.13% | Best 73.13%
+    baseline/s44 Epoch 30/50 | Acc 76.45% | Best 77.61%
+    baseline/s44 Epoch 40/50 | Acc 80.85% | Best 80.85%
+    baseline/s44 Epoch 50/50 | Acc 81.87% | Best 81.96%
+  -> Accuracy: 81.96% | Params: 1,480,824
+  Config baseline: 81.82 +/- 0.21%
+
+======================================================================
+Config                             Accuracy       Params
+======================================================================
+topology_only                     82.86 +/- 0.22   1,480,824
+baseline                          81.82 +/- 0.21   1,480,824
+======================================================================
+Total time: 2720s
+
+Results saved to results/tier_b3/ablation_results.json

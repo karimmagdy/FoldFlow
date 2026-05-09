@@ -38,9 +38,11 @@ def load_wikitext2(
     from datasets import load_dataset
     from transformers import GPT2TokenizerFast
 
-    # Use local cache to avoid network hangs
-    os.environ.setdefault("HF_HUB_OFFLINE", "1")
-    tokenizer = GPT2TokenizerFast.from_pretrained("gpt2", local_files_only=True)
+    # Allow online download for first-time use; HuggingFace will cache
+    # automatically. Set HF_HUB_OFFLINE=1 in the environment to force
+    # offline mode (e.g. on isolated nodes after caching is complete).
+    offline = os.environ.get("HF_HUB_OFFLINE", "0") == "1"
+    tokenizer = GPT2TokenizerFast.from_pretrained("gpt2", local_files_only=offline)
     vocab_size = tokenizer.vocab_size
 
     dataset = load_dataset("wikitext", "wikitext-2-raw-v1")

@@ -31,12 +31,12 @@ def plot_cross_domain(save_dir: Path = SAVE_DIR):
     # WikiText-2: delta PPL when removing component from full model
     # Positive = removing hurts (component helps)
     wt2_delta = [
-        -4.2,   # removing Langevin helps slightly (525.2 -> 521.0)
+        0.0,    # removing Langevin: no effect (converged)
         0.0,    # no topology in LM
         0.0,    # no cooperativity in LM
         1.9,    # removing chaperone: 525.2 -> 527.1
         0.0,    # no env sensitivity in LM
-        63.6,   # removing energy gate: 525.2 -> 588.8
+        60.9,   # removing energy gate (converged)
     ]
 
     x = np.arange(len(components))

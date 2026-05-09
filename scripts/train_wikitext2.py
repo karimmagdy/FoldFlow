@@ -63,6 +63,9 @@ def parse_args():
                         help="Disable FoldFlow chaperone correction for ablations")
     parser.add_argument("--disable-langevin", action="store_true",
                         help="Disable FoldFlow Langevin refinement for ablations")
+    parser.add_argument("--attention-variant", type=str, default="energy",
+                        choices=["energy", "per-token", "talking-heads"],
+                        help="LM head-gating variant (Tier B B2; reviewer Q4)")
 
     # General
     parser.add_argument("--seeds", type=int, default=3)
@@ -147,6 +150,7 @@ def make_foldflow_config(args, vocab_size):
         use_energy_gate=not args.disable_energy_gate,
         use_chaperone=not args.disable_chaperone,
         use_langevin=not args.disable_langevin,
+        attention_variant=args.attention_variant,
     )
 
 

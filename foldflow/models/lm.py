@@ -31,6 +31,11 @@ class LMConfig:
     use_energy_gate: bool = True
     use_chaperone: bool = True
     use_langevin: bool = True
+    # 2026-05-04 (W4 / Tier B B2): selectable attention head-gating variant.
+    # "energy"        -> EnergyAttention with causal cumulative mean (post-W1 fix)
+    # "per-token"     -> PerTokenCausalGate (no pooling; current-position only)
+    # "talking-heads" -> TalkingHeadsAttention (Shazeer et al. 2020)
+    attention_variant: str = "energy"
 
 
 # ---------------------------------------------------------------------------
@@ -120,7 +125,18 @@ class TransformerPPLM(nn.Module):
 # ---------------------------------------------------------------------------
 
 class EnergyAttention(nn.Module):
-    """Attention with per-head energy gating."""
+    """Attention with per-head energy gating (CAUSALLY SAFE, post-W1 fix).
+
+    History note (2026-05-04): the original implementation gated per head
+    using ``x.mean(dim=1)`` -- a non-causal global average over the whole
+    sequence -- which during teacher-forced training let the gate at every
+    position depend on future tokens. The reviewer of the SR submission
+    flagged this as W1 and the present implementation fixes it: the gate
+    at position ``t`` uses only the CAUSAL CUMULATIVE MEAN of past tokens
+    ``[0, ..., t]``, so future-token information cannot reach the gate.
+    See the new "Causal energy gating (W1 fix)" subsection in the SR
+    Methods for the formal statement.
+    """
 
     def __init__(self, config: LMConfig):
         super().__init__()
@@ -150,14 +166,147 @@ class EnergyAttention(nn.Module):
         scores = scores.masked_fill(mask.unsqueeze(0).unsqueeze(0), float("-inf"))
 
         attn = F.softmax(scores, dim=-1)
-        # Energy-modulated: each head gets a context-dependent gate
+        # Energy-modulated: each head gets a context-dependent gate.
+        # CAUSAL: at position t, use the cumulative mean of x[:, 0..t, :]
+        # so the gate cannot depend on future tokens.
         if self.use_energy_gate:
-            energy_weights = self.energy_gate(x.mean(dim=1))  # (B, n_heads)
-            attn = attn * energy_weights[:, :, None, None]
+            cum_sum = x.cumsum(dim=1)                                          # (B, L, D)
+            counts = torch.arange(1, L + 1, device=x.device, dtype=x.dtype).view(1, L, 1)
+            causal_ctx = cum_sum / counts                                      # (B, L, D)
+            energy_weights = self.energy_gate(causal_ctx)                      # (B, L, n_heads)
+            # Reshape for broadcast against (B, n_heads, L_q, L_k):
+            #   gate at query position t multiplies attn[:, :, t, :]
+            gate = energy_weights.permute(0, 2, 1).unsqueeze(-1)               # (B, n_heads, L, 1)
+            attn = attn * gate
         attn = self.dropout(attn)
 
         out = torch.einsum("bhlm,bmhd->blhd", attn, v).reshape(B, L, D)
         return self.out(out)
+
+
+# ---------------------------------------------------------------------------
+# 2026-05-04 (Tier B B2): two additional head-gating baselines per reviewer Q4
+# ---------------------------------------------------------------------------
+
+class PerTokenCausalGate(nn.Module):
+    """Per-token head gating with NO pooling.
+
+    Gate at position ``t`` is computed from x[:, t, :] alone -- no
+    sequence pooling at all. This is the simplest causally-safe gate and
+    serves as a baseline against EnergyAttention's cumulative-mean variant:
+    any benefit of EnergyAttention over this baseline is attributable to
+    the multi-token cumulative-mean structure rather than to per-head
+    gating per se.
+    """
+
+    def __init__(self, config: LMConfig):
+        super().__init__()
+        self.n_heads = config.n_heads
+        self.d_head = config.d_model // config.n_heads
+        self.scale = self.d_head ** -0.5
+
+        self.qkv = nn.Linear(config.d_model, 3 * config.d_model)
+        self.out = nn.Linear(config.d_model, config.d_model)
+        self.dropout = nn.Dropout(config.dropout)
+
+        # Same gate architecture as EnergyAttention but applied per-token
+        # (no pooling) so it is trivially causal.
+        self.head_gate = nn.Sequential(
+            nn.Linear(config.d_model, config.d_model // 4),
+            nn.GELU(),
+            nn.Linear(config.d_model // 4, config.n_heads),
+            nn.Sigmoid(),
+        )
+        # Honour the use_energy_gate switch so that --disable-energy-gate
+        # also disables this variant for sanity-check ablations.
+        self.use_energy_gate = config.use_energy_gate
+
+    def forward(self, x: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
+        B, L, D = x.shape
+        qkv = self.qkv(x).reshape(B, L, 3, self.n_heads, self.d_head)
+        q, k, v = qkv.unbind(2)
+
+        scores = torch.einsum("blhd,bmhd->bhlm", q, k) * self.scale
+        scores = scores.masked_fill(mask.unsqueeze(0).unsqueeze(0), float("-inf"))
+
+        attn = F.softmax(scores, dim=-1)
+        if self.use_energy_gate:
+            gate = self.head_gate(x).permute(0, 2, 1).unsqueeze(-1)            # (B, n_heads, L, 1)
+            attn = attn * gate
+        attn = self.dropout(attn)
+
+        out = torch.einsum("bhlm,bmhd->blhd", attn, v).reshape(B, L, D)
+        return self.out(out)
+
+
+class TalkingHeadsAttention(nn.Module):
+    """Talking-Heads attention (Shazeer et al., 2020).
+
+    Adds two learned linear projections across the head dimension --
+    one before softmax (pre-talking) and one after softmax (post-talking) --
+    that mix the per-head attention scores. This is the most-cited
+    head-mixing baseline in the head-gating literature and the reviewer
+    named it explicitly as a control comparison for energy-gated attention.
+
+    Implementation: standard scaled-dot-product attention with two
+    extra (n_heads, n_heads) linear projections on the head axis.
+    """
+
+    def __init__(self, config: LMConfig):
+        super().__init__()
+        self.n_heads = config.n_heads
+        self.d_head = config.d_model // config.n_heads
+        self.scale = self.d_head ** -0.5
+
+        self.qkv = nn.Linear(config.d_model, 3 * config.d_model)
+        self.out = nn.Linear(config.d_model, config.d_model)
+        self.dropout = nn.Dropout(config.dropout)
+
+        # Pre- and post-softmax head-mixing projections (the talking step).
+        self.pre_talking = nn.Linear(config.n_heads, config.n_heads, bias=False)
+        self.post_talking = nn.Linear(config.n_heads, config.n_heads, bias=False)
+
+    def forward(self, x: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
+        B, L, D = x.shape
+        qkv = self.qkv(x).reshape(B, L, 3, self.n_heads, self.d_head)
+        q, k, v = qkv.unbind(2)
+
+        scores = torch.einsum("blhd,bmhd->bhlm", q, k) * self.scale
+        # Pre-softmax talking: mix scores across heads at each (l, m).
+        # scores: (B, H, L, L) -> permute to (B, L, L, H) -> linear -> back
+        scores_p = scores.permute(0, 2, 3, 1)
+        scores_p = self.pre_talking(scores_p)
+        scores = scores_p.permute(0, 3, 1, 2)
+        scores = scores.masked_fill(mask.unsqueeze(0).unsqueeze(0), float("-inf"))
+
+        attn = F.softmax(scores, dim=-1)
+        # Post-softmax talking: same mixing on the post-softmax weights.
+        attn_p = attn.permute(0, 2, 3, 1)
+        attn_p = self.post_talking(attn_p)
+        attn = attn_p.permute(0, 3, 1, 2)
+        attn = self.dropout(attn)
+
+        out = torch.einsum("bhlm,bmhd->blhd", attn, v).reshape(B, L, D)
+        return self.out(out)
+
+
+# Attention-variant dispatch (Tier B B2).
+_ATTN_VARIANTS = {
+    "energy": EnergyAttention,
+    "per-token": PerTokenCausalGate,
+    "talking-heads": TalkingHeadsAttention,
+}
+
+
+def make_attention(config: LMConfig) -> nn.Module:
+    """Factory: pick the attention class by config.attention_variant."""
+    variant = getattr(config, "attention_variant", "energy")
+    if variant not in _ATTN_VARIANTS:
+        raise ValueError(
+            f"Unknown attention_variant {variant!r}; "
+            f"choose from {list(_ATTN_VARIANTS)}"
+        )
+    return _ATTN_VARIANTS[variant](config)
 
 
 class FoldFlowLMBlock(nn.Module):
@@ -167,7 +316,7 @@ class FoldFlowLMBlock(nn.Module):
         super().__init__()
         self.norm1 = nn.LayerNorm(config.d_model)
         self.norm2 = nn.LayerNorm(config.d_model)
-        self.attn = EnergyAttention(config)
+        self.attn = make_attention(config)  # 2026-05-04: was EnergyAttention(config); now dispatch by config.attention_variant
         self.ffn = nn.Sequential(
             nn.Linear(config.d_model, config.d_model * 4),
             nn.GELU(),
