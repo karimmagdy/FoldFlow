@@ -1,5 +1,7 @@
 # FoldFlow: Neural Architecture Inspired by Protein Folding
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20932167.svg)](https://doi.org/10.5281/zenodo.20932167)
+
 Codebase for the NeurIPS 2026 Workshop submission.
 
 ## Quick Start
