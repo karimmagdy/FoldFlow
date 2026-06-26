@@ -14,7 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{subcaption}
-\usepackage[round]{natbib}
+\usepackage{natbib}
 \usepackage[margin=1in]{geometry}
 \usepackage{authblk}
 \usepackage{hyperref}
@@ -35,7 +35,7 @@
 \author[1,2]{Ghada Khoriba}
 \author[1,3]{Hala Abbas}
 
-\affil[1]{Computer Science Department, Faculty of Computers and Artificial Intelligence, Helwan University, Helwan, Egypt}
+\affil[1]{Computer Science Department, Faculty of Computers and Artificial Intelligence, Capital University, Helwan, Egypt}
 \affil[2]{School of Information Technology and Computer Science (ITCS), Nile University, Giza, Egypt}
 \affil[3]{Faculty of Computer Studies, Arab Open University, Cairo, Egypt}
 \affil[4]{Independent Researcher, Cairo, Egypt}
@@ -64,15 +64,16 @@ improves accuracy by $+1.4$~pp (83.0\% vs.\ 81.6\% baseline;
 85.72\% at 200 epochs). A no-folding-dynamics control---encoder plus
 one MHA layer applied once---attains 82.86\%, closing $\approx 74\%$
 of that gap, so the dominant CIFAR-10 contributor is the attention
-addition rather than the folding interpretation. On WikiText-2, the
+addition rather than the folding interpretation. On WikiText-2, head-level
+energy gating transfers as a small but reproducible gain: the
 causally-safe FoldFlow-LM reduces perplexity by $4.1\%$ over a
-matched Transformer++ baseline ($577.6$ vs.\ $602.3$); a per-token
-causal gate is marginally better ($-4.5\%$) and Talking-Heads does
-not improve. An earlier non-causal formulation reported a $14.4\%$
-reduction; we trace and correct that result. The finding is
-modality-dependent: head-level gating helps a small but reproducible
-amount, the specific energy framing is not critical, and not every
-folding principle transfers across modalities.
+matched Transformer++ baseline ($577.6$ vs.\ $602.3$; a per-token
+causal gate is marginally better at $-4.5\%$, and Talking-Heads does
+not improve), once an earlier non-causal formulation's $14.4\%$
+figure is corrected for teacher-forced future-token leakage. The
+finding is modality-dependent: the specific energy framing is not
+critical, and not every folding principle transfers across
+modalities.
 \end{abstract}
 
 % ====================================================================
@@ -80,7 +81,7 @@ folding principle transfers across modalities.
 \label{sec:intro}
 
 How living matter computes is one of the central questions at the
-interface of physics, biology and
+interface of physics, biology, and
 information science.\cite{hopfield1982,anfinsen1973} Among the
 simplest and most reliable computations performed by biological
 systems is \emph{protein folding}: the physical process by which a
@@ -117,7 +118,7 @@ across modern neural architectures: energy
 minimisation,\cite{lecun2006tutorial,du2019implicit}
 iterative refinement,\cite{dehghani2019universal,bai2019deep}
 cooperative local-to-global coupling,\cite{chollet2017xception}
-input-dependent gating\cite{shazeer2017outrageously,fedus2022switch}
+input-dependent gating,\cite{shazeer2017outrageously,fedus2022switch}
 and feature-wise modulation.\cite{perez2018film}
 
 In this work we ask a deliberately empirical question: \emph{when
@@ -144,14 +145,16 @@ improves baseline accuracy by a small but measurable $+1.4$~pp
 ($83.0 \pm 0.4$\% vs.\ $81.6 \pm 0.2$\% over 50 epochs;
 $85.72$\% with 200 epochs). The gain is statistically significant
 ($p<0.001$) but modest in absolute terms. \textbf{(ii)} On
-WikiText-2, the post-fix causally-safe FoldFlow-LM (50.2~M) achieves
+WikiText-2, head-level energy gating transfers: the post-fix
+causally-safe FoldFlow-LM (50.2~M) achieves
 $577.6 \pm 1.9$ perplexity versus $602.3 \pm 4.2$ for the default
-Transformer++ (44.8~M)---a $4.1\%$ relative reduction. An earlier
-formulation of the energy gate pooled context non-causally and
-reported $512.5 \pm 3.6$ ($14.4\%$ reduction); we trace this gap to
-teacher-forced future-token leakage and replace the gate with a
-causal cumulative-mean variant, restoring autoregressive correctness
-(Methods, ``Causal energy gating (W1 fix)''; Table~\ref{tab:lm_attn_variants}).
+Transformer++ (44.8~M)---a $4.1\%$ relative reduction. (This
+post-fix figure supersedes an earlier non-causal formulation that
+reported $512.5 \pm 3.6$, a $14.4\%$ reduction inflated by
+teacher-forced future-token leakage; we replace the offending gate
+with a causal cumulative-mean variant that restores autoregressive
+correctness, Methods ``Causal energy gating'';
+Table~\ref{tab:lm_attn_variants}.)
 A simpler per-token causal gate is marginally better
 ($575.2 \pm 1.8$, $-4.5\%$); a Talking-Heads control does not improve
 over the baseline. \textbf{(iii)} Component ablation under the
@@ -173,6 +176,38 @@ within-architecture comparison against a
 Transformer++\cite{vaswani2017attention,ba2016layer,shazeer2020glu}
 baseline.
 
+\paragraph{Relation to recent work.} FoldFlow sits at the
+intersection of four currently active threads. First, energy- and
+score-based models have moved from pure generation into
+\emph{discriminative} vision: a single diffusion energy-based
+network can classify CIFAR-10 competitively,\cite{guo2023egc} a
+pretrained diffusion model can be read out directly as a zero-shot
+classifier,\cite{li2023diffusionclassifier} and the inductive biases
+that let such iterative-refinement models generalise are now being
+dissected explicitly,\cite{an2024inductivebias} echoing our use of
+Langevin energy dynamics (C1) as a discriminative module. Second,
+the protein-folding models that motivate our hallmarks have advanced
+rapidly since AlphaFold2, with AlphaFold3 extending accurate
+prediction to biomolecular complexes\cite{abramson2024alphafold3}
+and protein language models predicting atomic-level structure at
+evolutionary scale;\cite{lin2023esm2} FoldFlow deliberately abstracts
+the \emph{principles} of these systems rather than their domain
+specifics. Third, our energy-gated attention is one instance of a
+fast-growing family of head-level gating and head-mixing
+mechanisms---learned per-head gates,\cite{qiu2025gatedattention}
+mixture-of-head attention,\cite{jin2024moh} and dynamically
+composable heads that generalise Talking-Heads\cite{xiao2024dcmha}---
+and our finding that the gain is a generic head-gating effect rather
+than an energy-specific one is consistent with this literature.
+Fourth, the deliberately high absolute perplexities of our
+train-from-scratch WikiText-2 setup should be read against the
+recent shift toward state-space and hybrid long-context
+architectures such as Mamba\cite{gu2023mamba} and
+Griffin,\cite{de2024griffin} which target precisely the long-range
+regime our small Transformer does not; our aim is a controlled
+within-architecture comparison, not a state-of-the-art language
+model.
+
 % ====================================================================
 \section*{Results}
 \label{sec:results}
@@ -185,7 +220,41 @@ from an input encoder. The particles are iteratively refined through
 $T$ dynamics steps, each applying a subset of five protein-folding-inspired
 modules. Table~\ref{tab:characteristics} summarises the biological
 motivation, the mathematical form, and the implementation of each
-module. Full derivations are given in the Methods section.
+module, and Figure~\ref{fig:overview} shows how the five principles
+are instantiated --- differently --- in the vision and language
+pipelines. Full derivations are given in the Methods section.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig_overview.pdf}
+  \caption{\textbf{FoldFlow at a glance: one biological framework,
+  two modality-specific instantiations.} \textbf{(A)} The five
+  protein-folding hallmarks (C1--C5) that serve as the shared design
+  source. \textbf{(B)} The vision pipeline: a weak CNN encoder
+  initialises particles, a data-dependent attention topology (C2) is
+  applied once at initialisation, a folding-dynamics loop of $K$
+  steps applies Langevin energy descent (C1), cooperativity coupling
+  (C3), a gradient-norm-gated chaperone (C4) and environmental
+  modulation (C5), and a mean-pool readout feeds a linear
+  classifier. \textbf{(C)} The FoldFlow-LM pipeline: energy-gated
+  attention (C1) and an intra-block chaperone (C4) inside each
+  Transformer block, followed by post-network Langevin refinement
+  (C1) at inference. Colour encodes the principle and the Cx tag on
+  each module links it back to panel~A. The same hallmark is
+  instantiated differently across modalities: C1 is Langevin
+  particle dynamics in vision but energy-gated attention plus
+  inference-time refinement in language, and C4 is a
+  gradient-norm-gated module in vision but a pre/post-FFN comparison
+  in language. In the language model, adaptive topology (C2) is not
+  ported as a separate module because standard per-layer
+  self-attention already plays that role, while cooperativity (C3)
+  and environmental sensitivity (C5) are deliberately omitted as
+  they are subsumed by the feed-forward network and layer
+  normalisation of a standard Transformer; the ablations in
+  Tables~\ref{tab:lm} and~\ref{tab:lm_attn_variants} probe exactly
+  these choices.}
+  \label{fig:overview}
+\end{figure}
 
 \begin{table}[t]
 \centering
@@ -203,13 +272,13 @@ states; C5 modulates computation by input context.}
 \# & Characteristic & Biological mechanism & Neural implementation \\
 \midrule
 C1 & Energy minimisation & Thermodynamic folding funnel
-    & Langevin dynamics on $\E_\btheta(\bz \mid \bx)$ \\
+    & Langevin dynamics on $\E_{\btheta}(\bz \mid \bx)$ \\
 C2 & Adaptive topology & Native contact formation
     & Multi-head self-attention over particles (applied once) \\
 C3 & Cooperativity & Local interactions $\to$ global structure
     & Depthwise-separable 1D convolution \\
 C4 & Chaperone & Stress-gated assisted folding
-    & $\|\grad_\bz \E\|$-gated corrective module \\
+    & $\|\grad_{\bz} \E\|$-gated corrective module \\
 C5 & Environmental sensitivity & Cellular-context modulation
     & Context-conditioned scale \& shift (FiLM-style) \\
 \bottomrule
@@ -273,7 +342,7 @@ individual gain ($+1.3$~pp), consistent with its physical analogue:
 native contact maps are the primary determinant of folding rates and
 of the final folded state.\cite{dill2012protein} Cooperativity,
 chaperone and environmental modulation each add smaller, incremental
-gains. The reviewer asked the directly probative question: does the
+gains. A directly probative question is this: does the
 $+1.3$~pp gain attributed to C2 require the folding-dynamics
 interpretation, or is it just the effect of adding one extra MHA
 layer once before the readout? We tested this with a parameter-matched
@@ -320,7 +389,9 @@ a 10-class problem (Supplementary Table~S5).
 \begin{table}[t]
 \centering
 \caption{\textbf{CIFAR-10 ablation.} Mean $\pm$ std top-1 accuracy (\%)
-over 3 seeds. All FoldFlow rows share the same weak encoder
+over 3 seeds, where the reported spread is the sample standard
+deviation across those seeds (not a fitted confidence interval).
+All FoldFlow rows share the same weak encoder
 ($\sim$1.35~M parameters, fixed across variants) and the same
 training schedule. The FoldFlow modules are individually small ---
 adaptive topology $\sim$30~K, cooperativity $\sim$50~K, chaperone
@@ -328,14 +399,16 @@ $\sim$50~K, environmental modulation $\sim$20~K --- so even adding
 all four keeps the total parameter count at 1.48~M to within
 $\pm$1\%. \emph{No hidden capacity rebalancing was performed: modules
 are added, not swapped; the encoder and readout are identical across
-rows.} The ``Topology MHA only'' row addresses reviewer W5: the
+rows.} The ``Topology MHA only'' row isolates the no-folding-dynamics control: the
 dynamics loop is disabled entirely (no Langevin, no cooperativity,
 no chaperone, no environmental modulation), and the encoder is
 followed by a single MHA call applied once at $t{=}0$ before a
 deterministic readout. This row tests whether the topology gain
 attributed to the C2 module persists once the folding dynamics are
-removed. Published baselines use standard encoders and are shown
-for context, not as head-to-head comparisons.}
+removed. The full-model row at 200 epochs is a single extended
+training run (one seed) and therefore carries no across-seed
+standard deviation. Published baselines use standard encoders and
+are shown for context, not as head-to-head comparisons.}
 \label{tab:ablation}
 \small
 \begin{tabular}{@{}lcc@{}}
@@ -351,7 +424,7 @@ WRN-28-10\cite{zagoruyko2016wide}          & 36.5~M & 96.1 \\
 \multicolumn{3}{@{}l}{\emph{FoldFlow ablation (weak encoder):}} \\
 Baseline (encoder only)             & 1.48~M & $81.6 \pm 0.2$ \\
 \midrule
-\multicolumn{3}{@{}l}{\emph{Reviewer W5 control (no folding dynamics; encoder + 1 MHA layer once):}} \\
+\multicolumn{3}{@{}l}{\emph{No-folding-dynamics control (encoder + 1 MHA layer once):}} \\
 Topology MHA only (C2, no C1/C3/C4/C5) & 1.48~M & $82.86 \pm 0.22$ \\
 \midrule
 + Energy (C1)                        & 1.48~M & $81.8 \pm 0.1$ \\
@@ -409,7 +482,7 @@ Accuracy (\%) & 81.9 & 81.7 & \textbf{82.1} & 81.8 \\
 We next evaluate whether folding-inspired modules also benefit
 autoregressive language modelling. We compare \textbf{FoldFlow-LM}
 against a strong \textbf{Transformer++} baseline (pre-norm
-transformer,\cite{ba2016layer} GELU activations, tied embeddings)
+transformer,\cite{ba2016layer} GELU activations, and tied embeddings)
 on WikiText-2.\cite{merity2017pointer} Both model families use
 \emph{identical hyperparameters} ($d_\text{model}{=}512$, 6 layers,
 8 heads, sequence length 256, batch size 16, AdamW with learning rate
@@ -420,35 +493,21 @@ that any performance difference is attributable to the FoldFlow
 components rather than configuration choices. Each configuration is
 trained with 5 seeds.
 
-\textbf{Pre-fix and post-fix numbers.} An earlier version of this
-paper reported a $14.4\%$ relative perplexity reduction
-($512.5 \pm 3.6$ for FoldFlow-LM versus $598.4 \pm 3.9$ for
-Transformer++), under an energy-gate formulation that pooled the
-context globally---i.e.\ the per-head gate at every position read
-every token of the same training sequence, including positions
-strictly in the future. Although the multi-head attention itself
-was masked, the gate was a function of the global mean and
-therefore depended on tokens at $t' > t$ during teacher forcing.
-We trace this leakage to a single $\texttt{x.mean(dim=1)}$ in the
-energy-gating implementation and replace it with a causal cumulative
-mean (Methods, ``Causal energy gating (W1 fix)''). All numbers
-reported below are from the post-fix code, re-run with 5 seeds and
-17 epochs on a CUDA / GTX 1080 Ti backend; the pre-fix numbers are
-retained in Table~\ref{tab:lm_attn_variants} for reference and
-clearly labelled as not comparable.
+We ask which folding-inspired components transfer to autoregressive
+language modelling, and find the effect concentrated in head-level
+energy gating rather than in the specific energy framing.
 
-Under the corrected gate, FoldFlow-LM achieves a mean
+Under a causally-safe energy gate, FoldFlow-LM achieves a mean
 best-validation perplexity of $\mathbf{577.6 \pm 1.9}$ versus
 $602.3 \pm 4.2$ for the default Transformer++ baseline
 (Table~\ref{tab:lm_attn_variants}, Fig.~\ref{fig:wikitext2}). This
 is a $\mathbf{4.1\%}$ relative reduction
-(paired $t = 13.6$, $p < 10^{-3}$ across 5 seeds), substantially
-smaller than the leakage-confounded $14.4\%$ but still
+(paired $t = 13.6$, $p < 10^{-3}$ across 5 seeds), small but
 statistically reliable. The simpler per-token causal gate of
 Eq.~\ref{eq:causal_ctx} attains $575.2 \pm 1.8$ ($-4.5\%$), edging
 out the cumulative-mean Causal Energy variant. Talking-Heads
 attention\cite{shazeer2020talkingheads}---the canonical head-mixing
-baseline named explicitly by the reviewer---attains $606.1 \pm 6.1$,
+baseline---attains $606.1 \pm 6.1$,
 a small \emph{regression} of $+0.6\%$ relative to Transformer++.
 Two caveats apply. (i) The default Transformer++ has 44.8~M
 parameters whereas FoldFlow-LM has 50.2~M---a 12\% capacity gap
@@ -469,6 +528,26 @@ extended context\cite{dai2019transformer}; our purpose is a fair
 \emph{within-architecture} comparison, not state-of-the-art
 language modelling.
 
+\textbf{Validity check: correcting a teacher-forcing leakage.} The
+post-fix numbers above supersede an earlier version of this paper
+that reported a $14.4\%$ relative reduction ($512.5 \pm 3.6$ for
+FoldFlow-LM versus $598.4 \pm 3.9$ for Transformer++), under an
+energy-gate formulation that pooled the context globally: the
+per-head gate at every position read every token of the training
+sequence, including positions strictly in the future. Although the
+multi-head attention itself was masked, the gate was a function of
+the global mean and therefore depended on tokens at $t' > t$ during
+teacher forcing. We trace this leakage to a single
+$\texttt{x.mean(dim=1)}$ in the energy-gating implementation and
+replace it with a causal cumulative mean (Methods, ``Causal energy
+gating''). All numbers reported above are from the post-fix
+code, re-run with 5 seeds and 17 epochs on a CUDA / GTX 1080 Ti
+backend; the pre-fix numbers are retained in
+Table~\ref{tab:lm_attn_variants} for reference and clearly labelled
+as not comparable. The corrected $4.1\%$ is substantially smaller
+than the leakage-confounded $14.4\%$, but unlike the latter it
+reflects a strictly autoregressive model.
+
 \begin{table}[t]
 \centering
 \caption{\textbf{WikiText-2 perplexity.} Mean $\pm$ std across 5 seeds
@@ -477,7 +556,7 @@ FoldFlow variants share the same parameter count (50.2~M); the
 Transformer++ baseline has 44.8~M, and a parameter-matched wider
 baseline (50.9~M) is reported for fairness. The post-fix block
 reports the causally-safe Causal Energy gate
-(Methods, ``Causal energy gating (W1 fix)''), re-run with 5 seeds
+(Methods, ``Causal energy gating''), re-run with 5 seeds
 and 17 epochs on a CUDA / GTX 1080 Ti backend; the pre-fix block
 retains the original leakage-confounded numbers and is shown
 for completeness only (not a valid comparator). Published baselines
@@ -519,11 +598,9 @@ FoldFlow-LM (full)          & 50.2~M & $512.5 \pm 3.6$ \\
   paired $t = 13.6$, $p < 10^{-3}$, 5 seeds, 17 epochs each on a
   CUDA / GTX 1080 Ti backend). A simpler per-token causal gate
   attains $575.2 \pm 1.8$ ($-4.5\%$); Talking-Heads attention does
-  not improve over the baseline. The figure originally reported a
-  $14.4\%$ reduction under a non-causal cumulative-mean gate that
-  read future tokens during teacher forcing
-  (Methods, ``Causal energy gating (W1 fix)''); those numbers are
-  retained in the lower block of Table~\ref{tab:lm} for reference.
+  not improve over the baseline. These post-fix numbers supersede an
+  earlier non-causal gate (Methods, ``Causal energy gating''); the
+  pre-fix figures are retained in Table~\ref{tab:lm}.
   Mean $\pm$ std across 5 seeds.}
   \label{fig:wikitext2}
 \end{figure}
@@ -544,7 +621,7 @@ component-ablation numbers as a qualitative ranking
 absolute magnitudes are inflated by the same future-token leakage
 that affected the headline; a re-run of the no-chaperone and
 no-Langevin ablations under the post-fix code is left as a
-follow-up item, the directional claim that Langevin contributes
+follow-up item; the directional claim that Langevin contributes
 nothing is reinforced by the post-fix sweep below
 (Table~\ref{tab:lm_attn_variants}) which finds Causal Energy and
 the simpler per-token causal gate yield essentially the same
@@ -555,7 +632,7 @@ and provides the most informative qualitative result in the paper:
 \paragraph{Attention-variant control (causally safe gate).}
 Because the original energy-gating formulation pooled the context
 non-causally, the headline number above benefited from teacher-forced
-future-token leakage (Methods, ``Causal energy gating (W1 fix)''). We
+future-token leakage (Methods, ``Causal energy gating''). We
 re-evaluate FoldFlow-LM under the causally-safe gate of
 Eq.~\ref{eq:causal_ctx} and contrast it with two head-level baselines
 that share an identical backbone, parameter count and training
@@ -577,7 +654,7 @@ cumulative-mean structure adds nothing over the simplest causal
 form, and the contribution is genuinely a head-level gating effect
 rather than anything specific to the energy framing.
 \textbf{Third}, Talking-Heads attention---the canonical head-mixing
-baseline named explicitly by the reviewer---does not improve over
+baseline---does not improve over
 the Transformer++ baseline on this data ($606.1 \pm 6.1$, a small
 \emph{regression} of $+0.62\%$), suggesting that learned head
 mixing without an explicit causal-context summary fails to capture
@@ -601,7 +678,7 @@ perplexity. Re-run on a single CUDA / GTX 1080 Ti backend (Milano-Bicocca)
 under matched batch size and code path. The pre-fix row is shown
 for reference and corresponds to the original leakage-confounded
 Energy formulation; it is not a valid comparator (see Methods,
-``Causal energy gating (W1 fix)'').}
+``Causal energy gating'').}
 \label{tab:lm_attn_variants}
 \small
 \begin{tabular}{@{}lcccc@{}}
@@ -635,7 +712,7 @@ indistinguishable from the $d{=}512$ baseline at $602.3 \pm 4.2$;
 capacity alone explains essentially none of the gap, and the small
 ($\approx 4.1\%$) FoldFlow-LM advantage over either Transformer++
 configuration cannot be attributed to capacity. A learning-rate
-sensitivity sweep at $d{=}560$ (the reviewer's W6 ask), reported
+sensitivity sweep at $d{=}560$, reported
 in Table~\ref{tab:d560_lr}, finds that lower
 ($1{\times}10^{-4}$) and higher ($5{\times}10^{-4}$) rates do not
 recover additional perplexity over the default; the
@@ -940,19 +1017,19 @@ of a 6-layer, 8-head Transformer with $d_\text{model}=512$.
 \subsection*{C1: Energy minimisation via Langevin dynamics}
 
 We define a learnable energy function
-$\E_\btheta : \R^{N \times D} \times \R^{H} \to \R$ conditioned on
+$\E_{\btheta} : \R^{N \times D} \times \R^{H} \to \R$ conditioned on
 the encoder context $\bc$:
 \begin{equation}
-  \E_\btheta(\bz, \bc) = \sum_{i=1}^{N}
-    f_\btheta\left([\bz_i; \bc]\right),
+  \E_{\btheta}(\bz, \bc) = \sum_{i=1}^{N}
+    f_{\btheta}\left([\bz_i; \bc]\right),
 \label{eq:energy}
 \end{equation}
-where $f_\btheta$ is a three-layer MLP. Particles evolve by
+where $f_{\btheta}$ is a three-layer MLP. Particles evolve by
 discretised Langevin dynamics with a learned, input-adaptive step
 size $\epsilon(\bc)$:
 \begin{equation}
   \bz^{(t+1)} = \bz^{(t)}
-    - \epsilon(\bc) \, \tau_t \, \grad_\bz \E_\btheta(\bz^{(t)}, \bc)
+    - \epsilon(\bc) \, \tau_t \, \grad_{\bz} \E_{\btheta}(\bz^{(t)}, \bc)
     + \sqrt{2\tau_t}\,\sigma\,\boldsymbol{\eta},
   \qquad \boldsymbol{\eta} \sim \mathcal{N}(0, \mathbf{I}),
 \label{eq:langevin}
@@ -960,8 +1037,8 @@ size $\epsilon(\bc)$:
 where $\tau_t$ is annealed linearly from 1.0 to 0.1 over $T$ steps
 and $\sigma = 0.01$ controls noise magnitude. Physically, this is a
 temperature-annealed gradient descent on a learned landscape: at
-early steps the noise facilitates broad exploration, at late steps
-the dynamics approach the minimum of $\E_\btheta$.
+early steps the noise facilitates broad exploration, while at late steps
+the dynamics approach the minimum of $\E_{\btheta}$.
 
 \subsection*{C2: Adaptive topology}
 
@@ -996,10 +1073,10 @@ $s = \frac{1}{N}\sum_i \|\grad_{\bz_i} \E\|$ and gate a corrective
 network accordingly:
 \begin{equation}
   \bz \leftarrow \bz + \alpha \cdot \sigma(s) \cdot
-    g_\btheta\!\left([\bar{\bz}; \bc; \sigma(s)]\right),
+    g_{\btheta}\!\left([\bar{\bz}; \bc; \sigma(s)]\right),
 \end{equation}
 where $\bar{\bz} = \frac{1}{N}\sum_i \bz_i$, $\sigma(\cdot)$ is the
-sigmoid function, and $g_\btheta$ is a two-layer MLP with Tanh output.
+sigmoid function, and $g_{\btheta}$ is a two-layer MLP with Tanh output.
 The chaperone intervenes every other dynamics step, mirroring the
 biological observation that chaperones engage only when folding
 intermediates are under stress.\cite{hartl2011molecular}
@@ -1030,7 +1107,7 @@ vision pipeline.
 \begin{algorithm}[t]
 \caption{FoldFlow particle dynamics (vision).}\label{alg:foldflow}
 \begin{algorithmic}[1]
-\REQUIRE Input $\bx$, dynamics steps $T$, energy $\E_\btheta$
+\REQUIRE Input $\bx$, dynamics steps $T$, energy $\E_{\btheta}$
 \STATE $\bc \leftarrow \text{Encoder}(\bx)$
 \STATE $\bz^{(0)} \leftarrow \text{InitParticles}(\bc)$
 \STATE $\bz^{(0)} \leftarrow \bz^{(0)} + \text{MHA}(\text{LN}(\bz^{(0)}))$ \COMMENT{C2, applied once}
@@ -1038,9 +1115,9 @@ vision pipeline.
 \FOR{$t = 0$ \TO $T-1$}
   \STATE $\bz \leftarrow \bz + \alpha \cdot \text{PWConv}(\text{DWConv}(\text{LN}(\bz)))$ \COMMENT{C3}
   \STATE $\tau_t \leftarrow 1.0 - 0.9 \cdot t / T$
-  \STATE $\bz \leftarrow \bz - \epsilon(\bc)\tau_t \grad_\bz \E_\btheta(\bz, \bc) + \sqrt{2\tau_t}\sigma \boldsymbol{\eta}$ \COMMENT{C1}
+  \STATE $\bz \leftarrow \bz - \epsilon(\bc)\tau_t \grad_{\bz} \E_{\btheta}(\bz, \bc) + \sqrt{2\tau_t}\sigma \boldsymbol{\eta}$ \COMMENT{C1}
   \IF{$t \bmod 2 = 0$}
-    \STATE $s \leftarrow \tfrac{1}{N}\sum_i \|\grad_{\bz_i}\E\|$; \quad $\bz \leftarrow \bz + \alpha\sigma(s) g_\btheta([\bar\bz; \bc; \sigma(s)])$ \COMMENT{C4}
+    \STATE $s \leftarrow \tfrac{1}{N}\sum_i \|\grad_{\bz_i}\E\|$; \quad $\bz \leftarrow \bz + \alpha\sigma(s) g_{\btheta}([\bar\bz; \bc; \sigma(s)])$ \COMMENT{C4}
   \ENDIF
   \IF{$t \bmod 3 = 0$}
     \STATE $\bz \leftarrow (\gamma(\bc)+0.5) \odot \bz + \beta(\bc)$ \COMMENT{C5}
@@ -1078,7 +1155,7 @@ at positions $\le t$, so the gate is causal by construction:
 $\partial g_{t,i} / \partial \bx_{t'} = 0$ for all $t' > t$. We
 verify this empirically by gradient inspection across all three
 attention variants we evaluate (Causal energy gating, per-token
-causal, and Talking-Heads); see ``Causal energy gating (W1 fix)''
+causal, and Talking-Heads); see ``Causal energy gating''
 below for the verification protocol. The biological reading remains
 that of soft head selection,\cite{shazeer2017outrageously} with the
 gating signal derived from an energy-inspired context function
@@ -1098,11 +1175,11 @@ where $\alpha_\text{chap}$ is a learnable scalar initialised to 0.1.
 After the final block, hidden states undergo $K$ gradient-descent
 steps on a learned energy head
 $E_\text{head}: \R^d \to \R$:
-$\bz \leftarrow \bz - \epsilon \cdot \grad_\bz E_\text{head}(\bz)$,
+$\bz \leftarrow \bz - \epsilon \cdot \grad_{\bz} E_\text{head}(\bz)$,
 with $K{=}3$ and $\epsilon{=}0.01$. The energy head is trained
 end-to-end with the main cross-entropy loss.
 
-\paragraph{Causal energy gating (W1 fix).}
+\paragraph{Causal energy gating.}
 An earlier formulation of Eq.~\ref{eq:energy_gate} pooled the
 context globally, $\bar\bx = \tfrac{1}{L}\sum_{s=0}^{L-1}\bx_s$, so
 that under teacher forcing the gate at every position read every
@@ -1133,7 +1210,7 @@ testing whether the cumulative-mean structure adds anything over
 the simplest causal alternative. (b)~\emph{Talking-Heads
 attention},\cite{shazeer2020talkingheads} which inserts a learned
 linear projection across heads pre- and post-softmax---a well-known
-head-mixing baseline that the reviewer-named gating literature
+head-mixing baseline that the gating literature
 treats as the natural control. These directly probe whether
 \emph{any} head-level reweighting matters versus the specific
 energy-derived signal.
@@ -1163,22 +1240,30 @@ Material. Statistical comparisons use paired t-tests across seeds.
 % ====================================================================
 \section*{Data Availability}
 \label{sec:data}
-The datasets used in this study are publicly available.
-CIFAR-10 and CIFAR-100 are distributed by the University of
-Toronto.\cite{krizhevsky2009cifar} WikiText-2 is available from
-the Salesforce Research pointer-sentinel
-repository\cite{merity2017pointer}. We used the standard Hugging
-Face distribution for all three datasets. No new experimental data
-were generated. Pre-processing scripts, tokenisation details (GPT-2
-tokeniser, 50{,}257 tokens), and per-seed numerical results are
-included with the code release.
+All datasets used in this study are publicly available standard
+benchmarks. CIFAR-10 and CIFAR-100 are available from the University
+of Toronto at \url{https://www.cs.toronto.edu/~kriz/cifar.html} and
+via the Hugging Face datasets distribution.\cite{krizhevsky2009cifar}
+WikiText-2~\cite{merity2017pointer} is available via the Hugging Face
+datasets repository at \url{https://huggingface.co/datasets/Salesforce/wikitext}.
+No new experimental data were generated during this study.
+Pre-processing scripts, tokenisation details (GPT-2 tokeniser,
+50{,}257 tokens), per-seed numerical results, training
+configurations, and model checkpoints required to reproduce all
+reported figures and tables are released in the FoldFlow repository:
+\url{https://github.com/karimmagdy/FoldFlow}.
 
 \section*{Code Availability}
 \label{sec:code}
 All code for training, evaluation and figure generation is
 available at \url{https://github.com/karimmagdy/FoldFlow}, together
 with exact seeds, configuration files, logs, and model checkpoints
-sufficient to reproduce every table and figure in this paper. Experiments were
+sufficient to reproduce every table and figure in this paper. A
+permanently archived snapshot of the exact code version used for
+this study (GitHub release v1.0.0) is deposited in the Zenodo
+repository under a citable DOI:
+\href{https://doi.org/10.5281/zenodo.20932167}{10.5281/zenodo.20932167}.
+Experiments were
 run on a 2024 Apple M4 Mac (Apple silicon, MPS backend); the
 codebase is also compatible with CUDA and has been spot-tested on
 Google Colab Pro with A100/H100 GPUs. The full 70-hour experimental
@@ -1188,7 +1273,7 @@ budget is reported in the Supplementary Material.
 \section*{References}
 \renewcommand{\refname}{}
 \vspace{-2em}
-\bibliographystyle{naturemag}
+\bibliographystyle{plainnat}
 \bibliography{references}
 
 % ====================================================================
@@ -1198,8 +1283,13 @@ feedback and discussion. We also acknowledge the broader research
 community for the open-source tools and datasets (PyTorch, Hugging
 Face, CIFAR, WikiText) on which this work depends. Computational
 resources were provided by the authors on personal hardware (Apple
-M4) and by Google Colab Pro. No external funding supported this
-work.
+M4) and by Google Colab Pro.
+
+\section*{Funding}
+The authors received no specific grant from any funding agency in the
+public, commercial, or not-for-profit sectors for this work. Compute
+resources (Google Colab Pro and personal hardware) were self-funded
+by the corresponding author.
 
 \section*{Author Contributions}
 K.M.\ conceived the study, designed the FoldFlow architecture,
