@@ -795,7 +795,8 @@ larger share of the $80.8$~PPL gap to the parameter-matched 50.9~M
 Transformer++ control, $593.3 \pm 1.1$). Langevin refinement (C1)
 contributes modestly in vision ($+0.2$~pp) and not at all in
 language ($0.0$~PPL). Figure~\ref{fig:cross_domain} visualises this
-modality-dependent pattern.
+modality-dependent pattern, and Figure~\ref{fig:modules} details each
+principle's mechanism alongside its measured contribution.
 
 \begin{table}[t]
 \centering
@@ -831,6 +832,23 @@ C5 & Env.\ Sensitivity    & $+0.4$~pp  & --- \\
   important). Energy-gated attention dominates. The dominant
   principle differs qualitatively by modality.}
   \label{fig:cross_domain}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig_modules_detail.pdf}
+  \caption{\textbf{Per-principle module reference.} For each of the
+  five protein-folding hallmarks (C1--C5): its biological motivation,
+  its vision and language instantiations, and its measured
+  contribution---the change in CIFAR-10 top-1 accuracy (vision) and
+  WikiText-2 perplexity (language) when that module is removed from
+  the full model. The same principle is realised differently across
+  modalities---e.g.\ energy minimisation (C1) is Langevin refinement
+  in vision but energy-gated attention in language---while
+  cooperativity (C3), environmental sensitivity (C5) and, in language,
+  adaptive topology (C2) are subsumed by standard Transformer
+  components. Values are taken from Table~\ref{tab:cross_domain}.}
+  \label{fig:modules}
 \end{figure}
 
 The pattern is consistent with the biological metaphor: protein
